@@ -1,7 +1,3 @@
-//
-// Created by dima on 1/16/20.
-//
-
 #ifndef SEARCHING_ALGORITHMS_SERVER__FILECACHEMANAGER_H_
 #define SEARCHING_ALGORITHMS_SERVER__FILECACHEMANAGER_H_
 #include "CacheManager.h"
@@ -13,7 +9,7 @@ class FileCacheManager : public CacheManager {
  public:
   bool findSolution(std::string problem) override;
   std::string getSolution(std::string problem) override;
-  void saveSolution(std::string problem, std::string solution) override;
+  void saveSolution(std::string problem, std::string solution, std::string filename) override;
 };
 
 #endif //SEARCHING_ALGORITHMS_SERVER__FILECACHEMANAGER_H_

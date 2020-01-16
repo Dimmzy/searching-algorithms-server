@@ -1,7 +1,3 @@
-//
-// Created by haim on 14/01/2020.
-//
-
 #ifndef MYTESTCLIENTHANDLER_H_
 #define MYTESTCLIENTHANDLER_H_
 
@@ -12,7 +8,7 @@
 class MyTestClientHandler : public ClientHandler{
  private:
   Solver solver;
-  CacheManager cache_manager;
+  CacheManager* cache_manager;
 };
 
 #endif //MYTESTCLIENTHANDLER_H_
