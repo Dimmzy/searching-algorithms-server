@@ -8,11 +8,15 @@
 #include "ClientHandler.h"
 #include "Solver.h"
 #include "CacheManager.h"
+#include "StringReverser.h"
 
 class MyTestClientHandler : public ClientHandler{
  private:
-  Solver solver;
+  StringReverser solver;
   CacheManager cache_manager;
+ public:
+  void handleClient(std::istream input_stream, std::ostream output_stream) override;
+
 };
 
 #endif //MYTESTCLIENTHANDLER_H_
