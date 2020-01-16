@@ -7,6 +7,6 @@
 template <class PROBLEM, class SOLUTION>
 class Solver {
  public:
-  SOLUTION solve(PROBLEM problem);
+  virtual SOLUTION solve(PROBLEM problem) = 0;
 };
 #endif //SOLVER_H_

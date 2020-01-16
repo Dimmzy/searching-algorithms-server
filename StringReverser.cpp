@@ -3,3 +3,9 @@
 //
 
 #include "StringReverser.h"
+#include <algorithm>
+
+std::string StringReverser::solve(std::string problem) {
+  reverse(problem.begin(), problem.end());
+  return problem;
+}
