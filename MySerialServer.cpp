@@ -35,6 +35,7 @@ int MySerialServer::open(int port, ClientHandler* client_handler) {
 
 void MySerialServer::start(int socketfd, sockaddr_in address, ClientHandler* client_handler) {
   int client_socket;
+
   //while (!is_done) {
     client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
     if (client_socket == -1)
