@@ -9,10 +9,8 @@
 #include <iostream>
 class ClientHandler {
 
- protected:
-  int port;
  public:
-  virtual void handleClient(std::istream input_stream, std::ostream output_stream) = 0;
+  virtual void handleClient(int input_stream, int output_stream) = 0;
 };
 
 #endif //CLIENTHANDLER_H_

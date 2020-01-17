@@ -2,10 +2,14 @@
 // Created by haim on 15/01/2020.
 //
 
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <iostream>
 #include "MySerialServer.h"
+
 static bool is_done = false;
 
-int MySerialServer::open(int port, ClientHandler client_handler) {
+int MySerialServer::open(int port, ClientHandler* client_handler) {
   int socketfd = socket(AF_INET, SOCK_STREAM, 0);
   if (socketfd == -1)
     std::cerr << "Couldn't create socket" << std::endl;
@@ -22,21 +26,28 @@ int MySerialServer::open(int port, ClientHandler client_handler) {
     std::cerr << "Couldn't bind socket to IP" << std::endl;
   if (listen(socketfd, 10) == -1)
     std::cerr << "Couldn't listen to socket" << std::endl;
-  std::thread(&MySerialServer::start, this, socketfd, address);
-
-
+  else
+    std::cout << "Waiting for clients to connect"<<std::endl;
+  std::thread thread2(&MySerialServer::start, this, socketfd, address, client_handler);
+  thread2.detach();
 }
 
 
-void MySerialServer::start(int socketfd, sockaddr_in address) {
+void MySerialServer::start(int socketfd, sockaddr_in address, ClientHandler* client_handler) {
   int client_socket;
-  while (!is_done) {
+  //while (!is_done) {
     client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
     if (client_socket == -1)
       std::cerr << "Couldn't accept client" << std::endl;
     else {
       std::cout << "Connected" << std::endl;
       is_done = true;
+      client_handler->handleClient(client_socket, client_socket);
     }
-  }
+  //}
 }
+
+void MySerialServer::stop() {
+
+}
+

@@ -2,20 +2,31 @@
 // Created by haim on 14/01/2020.
 //
 
+#include <unistd.h>
+#include <sys/socket.h>
 #include "MyTestClientHandler.h"
 
-void MyTestClientHandler::handleClient(std::istream input_stream, std::ostream output_stream) {
+void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
   char bufferProblem[1024] = {0}, bufferSolution[1024] = {0};
-  std::string problem;
-  this->solver
-  while(input_stream.getline(bufferProblem, sizeof(bufferProblem) / sizeof(char))) {
+  std::string problem, solution, fileName;
+
+  int read1 = recv(input_stream, bufferProblem, 1024, 0);
+  while(true)
+  {
     problem = bufferProblem;
-    if(this->cache_manager.findSolution(problem)) {
-      bufferSolution = this->cache_manager.getSolution(problem);
+    if(this->cache_manager->findSolution(problem)) {
+      solution = this->cache_manager->getSolution(problem);
     } else {
-        bufferSolution = this->solver.solve(problem);
-        
+      solution = this->solver->solve(problem);
+      fileName = problem + "." + typeid(solver).name();
+      this->cache_manager->saveSolution(problem, solution, fileName);
     }
-    output_stream.write(bufferSolution, sizeof(bufferSolution) / sizeof(char));
+    strcpy(bufferSolution, solution.c_str());
+    send(output_stream, bufferSolution, sizeof(bufferSolution) / sizeof(char), 0);
   }
+}
+MyTestClientHandler::MyTestClientHandler(Solver<std::string , std::string>* string_reverser, CacheManager*
+cache_manager) {
+  this->solver = string_reverser;
+  this->cache_manager = cache_manager;
 }
