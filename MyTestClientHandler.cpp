@@ -1,30 +1,54 @@
-//
-// Created by haim on 14/01/2020.
-//
-
-#include <unistd.h>
-#include <sys/socket.h>
 #include "MyTestClientHandler.h"
-
+#define BUFFERSIZE 1024
+/**
+ * A function that handles the clients. Inputs the problem and output the result.
+ * @param input_stream Client Socket
+ * @param output_stream Client Socket
+ */
 void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
-  char bufferProblem[1024] = {0}, bufferSolution[1024] = {0};
+  char bufferProblem[BUFFERSIZE] = {0}, bufferSolution[BUFFERSIZE] = {0};
   std::string problem, solution, fileName;
 
-  int read1 = recv(input_stream, bufferProblem, 1024, 0);
-  while(true)
+
+  int valread = read(input_stream, bufferProblem, BUFFERSIZE);
+
+  problem = bufferProblem;
+  //remove '\n', '\r' characters
+  problem.erase(std::remove(problem.begin(), problem.end(), '\n'), problem.end());
+  problem.erase(std::remove(problem.begin(), problem.end(), '\r'), problem.end());
+  //The connection with the client will stop as the client types "end"
+  while(problem != "end")
   {
-    problem = bufferProblem;
+    //first check if we have already solved this problem before
     if(this->cache_manager->findSolution(problem)) {
-      solution = this->cache_manager->getSolution(problem);
-    } else {
-      solution = this->solver->solve(problem);
-      fileName = problem + "." + typeid(solver).name();
+      solution = this->cache_manager->getSolution(problem) + '\n';
+    } else { //it is a brand new problem
+      solution = this->solver->solve(problem) + '\n';
+      fileName = problem + '.' + this->solver->getRunTimeClassName();
       this->cache_manager->saveSolution(problem, solution, fileName);
     }
+    //clean the buffer of the solution
+    bzero(bufferSolution, BUFFERSIZE);
     strcpy(bufferSolution, solution.c_str());
-    send(output_stream, bufferSolution, sizeof(bufferSolution) / sizeof(char), 0);
+    //send back to client the result of his problem
+    send(output_stream, bufferSolution, BUFFERSIZE, 0);
+    //clean the buffer of the problem
+    bzero(bufferProblem, BUFFERSIZE);
+    //input new problem to solve or "end"-to stop the connection with the server
+    valread = read(input_stream, bufferProblem, BUFFERSIZE);
+    problem = bufferProblem;
+    //remove '\n', '\r' characters
+    problem.erase(std::remove(problem.begin(), problem.end(), '\n'), problem.end());
+    problem.erase(std::remove(problem.begin(), problem.end(), '\r'), problem.end());
   }
+  //after we finish the connection with the server close the client socket
+  close(input_stream);
 }
+/**
+ * Constructor
+ * @param string_reverser The responsible object for solving the recieved problems from the client
+ * @param cache_manager The database in which we keep all the problems we have already solved
+ */
 MyTestClientHandler::MyTestClientHandler(Solver<std::string , std::string>* string_reverser, CacheManager*
 cache_manager) {
   this->solver = string_reverser;

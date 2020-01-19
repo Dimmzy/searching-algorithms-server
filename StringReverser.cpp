@@ -10,3 +10,10 @@ std::string StringReverser::solve(std::string problem) {
   reverse(problem.begin(), problem.end());
   return problem;
 }
+
+std::string StringReverser::getRunTimeClassName() {
+  return this->runTimeClassName;
+}
+void StringReverser::setRunTimeClassName(const std::string name) {
+  this->runTimeClassName = name;
+}

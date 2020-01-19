@@ -11,6 +11,8 @@
  class StringReverser : public Solver<std::string, std::string> {
  public:
   std::string solve(std::string problem) override;
+  std::string getRunTimeClassName() override;
+  void setRunTimeClassName(const std::string name) override;
 };
 
 #endif //STRINGREVERSER_H_

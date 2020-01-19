@@ -16,11 +16,13 @@ bool FileCacheManager::findSolution(std::string problem) {
  * @return read the solution file and return the solution string
  */
 std::string FileCacheManager::getSolution(std::string problem) {
+  //std::string fileName = problem + '.' + this->solver->getRunTimeClassName();
   std::ifstream solFile (this->solutionCache.at(problem));
   std::string solution;
   if(solFile.is_open()) {
-    std::cout << solution;
+    solFile >> solution;
     solFile.close();
+    return solution;
   } else
     std::cout << "Couldn't open file" << std::endl;
 }
