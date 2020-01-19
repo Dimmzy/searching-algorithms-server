@@ -12,7 +12,7 @@
 class Server {
  public:
   virtual int open(int port, ClientHandler* client_handler) = 0;
-  virtual void stop() = 0;
+  virtual void stop(int sockfd) = 0;
 };
 
 #endif //SERVER_H_

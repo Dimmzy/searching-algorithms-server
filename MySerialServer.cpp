@@ -9,15 +9,13 @@
 
 static bool is_done = false;
 
-int MySerialServer::open(int port, ClientHandler* client_handler) {
+int MySerialServer::open(int port, ClientHandler *client_handler) {
   int socketfd = socket(AF_INET, SOCK_STREAM, 0);
   if (socketfd == -1)
     std::cerr << "Couldn't create socket" << std::endl;
-
   struct timeval tv;
-  tv.tv_sec = 20*60;
-  setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
-
+  tv.tv_sec = 20 * 60;
+  setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof(tv));
   sockaddr_in address;
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = INADDR_ANY;
@@ -27,28 +25,27 @@ int MySerialServer::open(int port, ClientHandler* client_handler) {
   if (listen(socketfd, 10) == -1)
     std::cerr << "Couldn't listen to socket" << std::endl;
   else
-    std::cout << "Waiting for clients to connect"<<std::endl;
+    std::cout << "Waiting for clients to connect" << std::endl;
   std::thread thread2(&MySerialServer::start, this, socketfd, address, client_handler);
   thread2.detach();
 }
 
-
-void MySerialServer::start(int socketfd, sockaddr_in address, ClientHandler* client_handler) {
-  int client_socket;
-
-  //while (!is_done) {
-    client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
-    if (client_socket == -1)
-      std::cerr << "Couldn't accept client" << std::endl;
-    else {
-      std::cout << "Connected" << std::endl;
-      is_done = true;
-      client_handler->handleClient(client_socket, client_socket);
-    }
-  //}
+void MySerialServer::start(int socketfd, sockaddr_in address, ClientHandler *client_handler) {
+  int client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
+  close(socketfd);
+  if (client_socket == -1)
+    std::cerr << "Couldn't accept client" << std::endl;
+  std::cout << "Connected" << std::endl;
+  char buffer[1024] = {0};
+  int valread = read(client_socket, buffer, 1024);
+  std::cout << buffer << std::endl;
+  char a[] = "HELLO FROM SERVER";
+  send(client_socket,a,strlen(a),0);
+  is_done = true;
+  client_handler->handleClient(client_socket, client_socket);
 }
 
-void MySerialServer::stop() {
-
+void MySerialServer::stop(int sockfd) {
+  close(sockfd);
 }
 

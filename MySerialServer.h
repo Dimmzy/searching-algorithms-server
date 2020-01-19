@@ -16,7 +16,7 @@ class MySerialServer : public Server {
   void openServer(int port);
   int open(int port, ClientHandler* client_handler);
   void start(int socketfd, sockaddr_in address, ClientHandler* client_handler);
-  void stop();
+  void stop(int sockfd);
 };
 
 
@@ -28,7 +28,7 @@ class Main {
     Solver<std::string,std::string>* string_reverser = new StringReverser();
     ClientHandler* my_test_client_handler = new MyTestClientHandler(string_reverser, file_cache_manager);
     Server* my_serial_server = new MySerialServer();
-    my_serial_server->open(5600, my_test_client_handler);
+    my_serial_server->open(6500, my_test_client_handler);
   }
 };
 }
