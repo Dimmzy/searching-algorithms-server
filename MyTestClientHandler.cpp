@@ -19,12 +19,13 @@ void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
   //The connection with the client will stop as the client types "end"
   while(problem != "end")
   {
+    fileName = problem + '.' + this->solver->getName();
     //first check if we have already solved this problem before
     if(this->cache_manager->findSolution(problem)) {
+      std::cout << "Found Solution for " + fileName << std::endl;
       solution = this->cache_manager->getSolution(problem) + '\n';
     } else { //it is a brand new problem
       solution = this->solver->solve(problem) + '\n';
-      fileName = problem + '.' + this->solver->getRunTimeClassName();
       this->cache_manager->saveSolution(problem, solution, fileName);
     }
     //clean the buffer of the solution

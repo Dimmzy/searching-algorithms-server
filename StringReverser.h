@@ -9,10 +9,11 @@
 #include "Solver.h"
 
  class StringReverser : public Solver<std::string, std::string> {
+ private:
+  std::string solverName = "StringReverser";
  public:
   std::string solve(std::string problem) override;
-  std::string getRunTimeClassName() override;
-  void setRunTimeClassName(const std::string name) override;
+  std::string getName() override;
 };
 
 #endif //STRINGREVERSER_H_

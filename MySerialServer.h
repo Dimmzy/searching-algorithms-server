@@ -25,9 +25,8 @@ namespace boot {
 class Main {
  public:
   static int main(int size, char *args[]) {
-    CacheManager *file_cache_manager = new FileCacheManager();
     Solver<std::string,std::string>* string_reverser = new StringReverser();
-    string_reverser->setRunTimeClassName("StringReverser");
+    CacheManager *file_cache_manager = new FileCacheManager("StringReverser");
     ClientHandler* my_test_client_handler = new MyTestClientHandler(string_reverser, file_cache_manager);
     Server* my_serial_server = new MySerialServer();
     my_serial_server->open(std::stoi(args[1]), my_test_client_handler);

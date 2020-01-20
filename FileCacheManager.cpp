@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include "FileCacheManager.h"
+#define SOL_FOLDER "Solutions/"
 
 /**
  * @param problem given a problem string
@@ -16,11 +17,11 @@ bool FileCacheManager::findSolution(std::string problem) {
  * @return read the solution file and return the solution string
  */
 std::string FileCacheManager::getSolution(std::string problem) {
-  //std::string fileName = problem + '.' + this->solver->getRunTimeClassName();
   std::ifstream solFile (this->solutionCache.at(problem));
   std::string solution;
   if(solFile.is_open()) {
-    solFile >> solution;
+    std::cout << "Getting Solution\n" << std::endl;
+    getline(solFile,solution);
     solFile.close();
     return solution;
   } else
@@ -31,16 +32,19 @@ std::string FileCacheManager::getSolution(std::string problem) {
  * A function that saves a passed solution from Client Handler
  * @param problem the problem string (which we use to classify the files prefix)
  * @param solution the solution we'll write into the file
- * @param filename the type of solver used to solve it, the second part of the filename
+ * @param fileName the type of solver used to solve it, the second part of the solverName
  */
-void FileCacheManager::saveSolution(std::string problem,std::string solution,  std::string filename) {
+void FileCacheManager::saveSolution(std::string problem,std::string solution, std::string fileName) {
   // Save solution to file
-  std::ofstream solFile (filename); // Gets a filename from clienthandler in the format of Problem.<SolverType>
+  std::ofstream solFile (SOL_FOLDER + fileName); // Gets a solverName from ClientHandler in the format of Problem.<SolverType>
   if (solFile.is_open()) {
     solFile << solution;
     solFile.close();
   } else
     std::cout << "Couldn't open file" << std::endl;
   // Add solution path to cache
-  this->solutionCache.insert(std::pair<std::string,std::string>(problem,filename));
+  this->solutionCache.insert(std::pair<std::string,std::string>(problem, SOL_FOLDER + fileName));
+}
+FileCacheManager::FileCacheManager(std::string solverName) {
+
 }
