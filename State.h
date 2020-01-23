@@ -5,18 +5,18 @@ template <typename T>
 class State {
  private:
   std::string state; // the state represented by a string
-  double cost; // cost to reach this state (set by a setter)
+  double cost; // the cost to cross this state
   State<T>* cameFrom; // the state we came from to this state (setter)
-  double costFromInitial;
+  double costFromInitial; //cost to reach this state (set by a setter)
 
  public:
-  State<T>(std::string state, double cost) {
+  State<T>(std::string& state, double cost) {
     this->state = state;
     this->cost = cost;
     this->cameFrom= nullptr;
     this->costFromInitial = 0;
   }
-  bool equals(State<T> otherState) {
+  bool equals(State<T>& otherState) {
     return this->state.compare(otherState.getState()) == 0;
   }
 

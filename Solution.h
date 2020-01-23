@@ -19,7 +19,7 @@ class Solution {
     //~this->listOfNodes;
   }
    */
-  void addNode(State<T> curState) {
+  void addNode(State<T>& curState) {
     this->listOfNodes.emplace_back(curState);
   }
 
