@@ -11,6 +11,14 @@ class Solution {
  private:
   std::vector<State<T>> listOfNodes;
  public:
+  /*
+  Solution<T> () {
+    //this->listOfNodes = new std::vector<State<T>>();
+  }
+  ~Solution() {
+    //~this->listOfNodes;
+  }
+   */
   void addNode(State<T> curState) {
     this->listOfNodes.emplace_back(curState);
   }

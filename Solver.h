@@ -1,5 +1,6 @@
 #ifndef SOLVER_H_
 #define SOLVER_H_
+#include <string>
 template <class PROBLEM, class SOLUTION>
 class Solver {
  protected:
