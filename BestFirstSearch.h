@@ -57,9 +57,9 @@ class BestFirstSearch : public Searcher<T> {
     return it;
   }
 
-  Solution<T> search(Searchable<T>& searchableItem) override {
+  Solution<T>* search(Searchable<T>* searchableItem) override {
     std::list<State<T>> succerssors;
-    State<T> initialState = searchableItem.getInitialState();
+    State<T> initialState = searchableItem->getInitialState();
     initialState.setCostFromInitial(initialState.getCost());
     addToOpenList(initialState);
     std::unordered_set<State<T>> closed = new std::unordered_set<State<T>>();
@@ -67,12 +67,12 @@ class BestFirstSearch : public Searcher<T> {
       State<T> n = popOpenList(); // removes the best state
 
       closed.emplace(n);
-      if (n.equals(searchableItem.getIGoallState())) {
-        Solution<T> solution = new Solution<T>();
-        return solution.backTrace(n, initialState); // back traces through the parents
+      if (n.equals(searchableItem->getIGoallState())) {
+        Solution<T>* solution = new Solution<T>();
+        return solution->backTrace(&n, &initialState); // back traces through the parents
       }
       // calling the delegated method, returns a list of states with n as a parent
-      succerssors = searchableItem.getAllPossibleStates(n);
+      succerssors = searchableItem->getAllPossibleStates(n);
       for(State<T> state : succerssors) {
         if(closed.find(state) != closed.end() && findStateInPriorityQueue(state) != this->my_priority_queue.c.end()) {
           state.setCostFromInitial(state.getCost() + n.getCost());

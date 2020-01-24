@@ -19,20 +19,20 @@ class Solution {
     //~this->listOfNodes;
   }
    */
-  void addNode(State<T>& curState) {
+  void addNode(State<T>* curState) {
     this->listOfNodes.emplace_back(curState);
   }
   void reverse() {
     this->listOfNodes.reserve(this->listOfNodes.begin(), this->listOfNodes.end());
   }
 
-  Solution<T> backTrace(State<T>& finalNode, State<T>& startNode) {
-    while(!finalNode.equals(startNode)) {
+  Solution<T>* backTrace(State<T>* finalNode, State<T>* startNode) {
+    while(!finalNode->equals(startNode)) {
       this->addNode(finalNode);
-      finalNode = finalNode.getPreviousNode();
+      finalNode = finalNode->getPreviousNode();
     }
     this->addNode(startNode);
-    this->reverse();
+    //this->reverse();
     return this;
   }
 };
