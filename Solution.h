@@ -22,7 +22,19 @@ class Solution {
   void addNode(State<T>& curState) {
     this->listOfNodes.emplace_back(curState);
   }
+  void reverse() {
+    this->listOfNodes.reserve(this->listOfNodes.begin(), this->listOfNodes.end());
+  }
 
+  Solution<T> backTrace(State<T>& finalNode, State<T>& startNode) {
+    while(!finalNode.equals(startNode)) {
+      this->addNode(finalNode);
+      finalNode = finalNode.getPreviousNode();
+    }
+    this->addNode(startNode);
+    this->reverse();
+    return this;
+  }
 };
 
 #endif //FLIGHTSIMULATORPART2__SOLUTION_H_

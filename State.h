@@ -30,6 +30,7 @@ class State {
   std::string getState() {
     return this->state;
   }
+
   double getCost() {
     return this->cost;
   }
