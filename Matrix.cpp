@@ -4,11 +4,11 @@
 #include <utility>
 
 State<std::vector<int>> Matrix::getInitialState() {
-  this->initialState.getState();
+  this->initialState->getState();
 }
 
 bool Matrix::isGoalState(State<std::vector<int>> curState) {
-  return this->goalState.equals(curState);
+  return this->goalState->equals(curState);
 }
 
 std::vector<State<std::vector<int>>> Matrix::getAllPossibleStates(State<std::vector<int>> curState) {
