@@ -4,16 +4,13 @@
 #include "Solver.h"
 #include "Searchable.h"
 #include "Searcher.h"
+#include "Matrix.h"
+#include "BFS.h"
+#include <vector>
 
-template<typename T, typename P, typename S>
-
-class ObjectAdapter : public Solver<P, S> {
+class ObjectAdapter : public Solver<Matrix*, std::string> {
  public:
-  S solve(P problem) override;
-  std::string getName() override;
- private:
-  Searchable<T> searchable;
-  Searcher<T> searcher;
+  std::string solve(Matrix* problem) override;
 };
 
 #endif //OBJECTADAPTER_H_

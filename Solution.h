@@ -11,18 +11,11 @@ class Solution {
  private:
   std::vector<State<T>> listOfNodes;
  public:
-  /*
-  Solution<T> () {
-    //this->listOfNodes = new std::vector<State<T>>();
+  Solution<T> (std::vector<State<T>> sol) {
+    this->listOfNodes = sol;
   }
-  ~Solution() {
-    //~this->listOfNodes;
+  std::vector<State<T>> getSolution() {
+    return reverse(this->listofNodes);
   }
-   */
-  void addNode(State<T>& curState) {
-    this->listOfNodes.emplace_back(curState);
-  }
-
 };
-
 #endif //FLIGHTSIMULATORPART2__SOLUTION_H_
