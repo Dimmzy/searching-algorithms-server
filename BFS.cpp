@@ -23,6 +23,7 @@ Solution<T> BFS<T>::search(Searchable<T>* searchableItem) {
         if (!neighbor.checkVisited()) {
           queue.push(neighbor);
           neighbor.setVisited(true);
+          neighbor.setCostFromInitial(neighbor.getCost() + current.getCost());
         }
       }
     }
