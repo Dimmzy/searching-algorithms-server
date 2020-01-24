@@ -1,6 +1,7 @@
 
 #include <sstream>
 #include "MyClientHandler.h"
+#include "Matrix.h"
 #define BUFFER_SIZE 1024
 
 void MyClientHandler::handleClient(int input_stream, int output_stream) {
@@ -8,8 +9,8 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   int columns = 0;
   bool columnSet = false;
   int rows = 0;
-  std::vector<double> start;
-  std::vector<double> end;
+  std::vector<int> start;
+  std::vector<int> end;
   int valread = read(input_stream, buffer,BUFFER_SIZE);
   std::string line, input(buffer);
   std::vector<std::vector<double>> inputMatrix;
@@ -34,6 +35,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
       /* We got start cell and end cell, finished reading! */
       break;
     }
+    // Another day another row
     rows++;
     std::vector<double> row;
     while(std::getline(lineStream,cell,',')) {
@@ -44,17 +46,20 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     columnSet = true;
     inputMatrix.push_back(row);
     bzero(buffer,BUFFER_SIZE);
-    valread = read(input_stream,buffer,BUFFER_SIZE);
+    read(input_stream,buffer,BUFFER_SIZE);
     input = buffer;
     rmLinebreak(input);
   }
   close(input_stream);
-  /* TESTER: Prints the Matrix */
+  auto* init = new State<std::vector<int>>(start,inputMatrix[start.at(0)][start.at(1)]);
+  auto* goal = new State<std::vector<int>>(end,inputMatrix[end.at(0)][end.at(1)]);
+  auto* matrix = new Matrix(columns, init, goal);
+  /* Inserts the states into our matrix */
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
-      std::cout << inputMatrix[i][j] << " ";
+      std::vector<int> cell{rows,columns};
+      matrix->addCell(new State<std::vector<int>>(cell,inputMatrix[rows][columns]));
     }
-    std::cout << std::endl;
   }
 }
 
