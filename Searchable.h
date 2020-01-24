@@ -9,6 +9,7 @@ class Searchable {
   virtual State<T> getInitialState() = 0;
   virtual bool isGoalState(State<T> curState) = 0;
   virtual std::vector<State<T>> getAllPossibleStates(State<T> curState) = 0;
+  virtual void reset() = 0;
 };
 
 #endif //SEARCHEABLE_H_

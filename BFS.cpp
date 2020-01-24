@@ -7,26 +7,26 @@ Solution<T> BFS<T>::search(Searchable<T>* searchableItem) {
 
   std::vector<State<T>> path;
   std::queue<State<T>> queue;
-  std::vector<State<T>> visited;
-  State<T> init = searchableItem.getInitialState();
-  visited.push_back(init);
+  State<T> init = searchableItem->getInitialState();
   queue.push(init);
+  init.setVisited(true);
   while (!queue.empty()) {
     State<T> current = queue.front();
     queue.pop();
-    if (searchableItem.isGoalState(current)) {
+    if (searchableItem->isGoalState(current)) {
       while(current.getPreviousNode() != nullptr) {
         path.push_back(current);
         current = current.getPreviousNode();
       }
     } else {
-      for (State<T> neighbor : searchableItem.getAllPossibleStates(current)) {
-        if (std::find(visited.begin(),visited.end(),current) != visited.end()) {
+      for (State<T> neighbor : searchableItem->getAllPossibleStates(current)) {
+        if (!neighbor.checkVisited()) {
           queue.push(neighbor);
-          visited.push_back(neighbor);
+          neighbor.setVisited(true);
         }
       }
     }
   }
+  searchableItem->reset();
   return new Solution<std::vector<int>>(path);
 }

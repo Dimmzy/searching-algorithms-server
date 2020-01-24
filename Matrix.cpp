@@ -46,12 +46,18 @@ void Matrix::addCell(State<std::vector<int>> *state) {
   this->matrix[state->getState().at(0),state->getState().at(1)] = state;
 }
 
+
+void Matrix::reset() {
+  for(int i = 0; i < this->size; i++) {
+    for(int j = 0; j < this->size; j++) {
+      State<std::vector<int>> cell = this->matrix[i][j];
+      cell.setPreviousNode(nullptr);
+      cell.setCostFromInitial(0);
+      cell.setVisited(false);
+    }
+  }
+}
+
 Matrix::Matrix(int size, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state)
     : size(size), initialState(initial_state), goalState(goal_state) {}
 
-Matrix::Matrix(const Matrix &obj) {
-  this->size = obj.size;
-  this->initialState = obj.initialState;
-  this->goalState = obj.goalState;
-  this->matrix = obj.matrix;
-}

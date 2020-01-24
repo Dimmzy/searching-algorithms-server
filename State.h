@@ -9,6 +9,7 @@ class State {
   double cost; // the cost to cross this state_name
   State<T> *cameFrom; // the state_name we came from to this state_name (setter)
   double costFromInitial; //cost to reach this state_name (set by a setter)
+  bool visited;
 
  public:
   State<T>(std::string &state, double cost) {
@@ -16,6 +17,7 @@ class State {
     this->cost = cost;
     this->cameFrom = nullptr;
     this->costFromInitial = 0;
+    visited = false;
   }
 
   State<T>(T& state, double cost) {
@@ -23,6 +25,7 @@ class State {
     this->cost = cost;
     this->cameFrom = nullptr;
     this->costFromInitial = 0;
+    visited = false;
   }
 
   bool equals(State<T> &otherState) {
@@ -34,6 +37,14 @@ class State {
   }
   double getCostFromInitial() {
     return this->costFromInitial;
+  }
+
+  void setVisited(bool v) {
+    this->visited = v;
+  }
+
+  bool checkVisited() {
+    return this->visited;
   }
 
   T getState() {
