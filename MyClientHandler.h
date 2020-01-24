@@ -8,8 +8,9 @@
 #include "CacheManager.h"
 #include "StringReverser.h"
 #include "FileCacheManager.h"
+#include "State.h"
 #include <cstring>
-#include "algorithm"
+#include <algorithm>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <vector>

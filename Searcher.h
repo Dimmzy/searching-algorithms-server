@@ -3,11 +3,12 @@
 
 #include "Searcher.h"
 #include "Solution.h"
-#include "Searcheable.h"
+#include "Searchable.h"
 template <typename T>
 class Searcher {
  public:
-  virtual Solution<T> search(Searcheable<T> searchableItem) = 0;
+  virtual std::string getName() = 0;
+  virtual Solution<T> search(Searchable<T> searchableItem) = 0;
 };
 
 #endif //SEARCHER_H_
