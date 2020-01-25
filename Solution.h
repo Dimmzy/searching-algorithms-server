@@ -5,7 +5,9 @@
 #ifndef FLIGHTSIMULATORPART2__SOLUTION_H_
 #define FLIGHTSIMULATORPART2__SOLUTION_H_
 #include <vector>
+#include <algorithm>
 #include "State.h"
+
 template <typename T>
 class Solution {
  private:
@@ -22,18 +24,17 @@ class Solution {
   void addNode(State<T>* curState) {
     this->listOfNodes.emplace_back(curState);
   }
-  void reverse() {
-    this->listOfNodes.reserve(this->listOfNodes.begin(), this->listOfNodes.end());
+  void reverse1() {
+    std::reverse(this->listOfNodes.begin(), this->listOfNodes.end());
   }
 
-  Solution<T>* backTrace(State<T>* finalNode, State<T>* startNode) {
+  void backTrace(State<T>* finalNode, State<T>* startNode) {
     while(!finalNode->equals(startNode)) {
       this->addNode(finalNode);
       finalNode = finalNode->getPreviousNode();
     }
     this->addNode(startNode);
-    //this->reverse();
-    return this;
+    this->reverse1();
   }
 };
 
