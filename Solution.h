@@ -11,7 +11,7 @@
 template <typename T>
 class Solution {
  private:
-  std::vector<State<T>> listOfNodes;
+  std::vector<State<T>*> listOfNodes;
  public:
   /*
   Solution<T> () {

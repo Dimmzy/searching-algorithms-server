@@ -13,12 +13,13 @@ class Matrix : public Searchable<std::vector<int>> {
   void setGoalState(State<std::vector<int>>* state);
   void setInitialState(State<std::vector<int>>* state);
   bool isGoalState(State<std::vector<int>>* curState) override;
-  std::vector<State<std::vector<int>>> getAllPossibleStates(State<std::vector<int>>* curState) override;
+  std::vector<State<std::vector<int>>*> getAllPossibleStates(State<std::vector<int>>* curState) override;
+  void printMatrix();
  private:
   int size;
   State<std::vector<int>>* initialState;
   State<std::vector<int>>* goalState;
-  State<std::vector<int>>** matrix;
+  std::vector<std::vector<State<std::vector<int>>*>> matrix;
   bool validateCell(int row, int column);
 };
 

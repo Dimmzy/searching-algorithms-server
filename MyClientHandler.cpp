@@ -57,8 +57,8 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   /* Inserts the states into our matrix */
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
-      std::vector<int> cell{rows,columns};
-      matrix->addCell(new State<std::vector<int>>(&cell,inputMatrix[rows][columns]));
+      std::vector<int> cell{i,j};
+      matrix->addCell(new State<std::vector<int>>(&cell,inputMatrix[i][j]));
     }
   }
 }
