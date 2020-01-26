@@ -24,17 +24,24 @@ class BFS : public Searcher<T,S> {
       State<std::vector<int>> *current = bfsQueue.front();
       bfsQueue.pop();
       if (searchableItem->isGoalState(current)) {
-        auto solution = new Solution<S>();
+        auto* solution = new Solution<S>();
         double sum = 0;
         while(current != init) {
+          solution->addNode(current);
+          /* Debug Path
           sum += current->getCost();
           std::cout << current->getCost();
           std::cout << "->";
+          */
           current = current->getPreviousNode();
         }
+        /* More path debugging
         std::cout << std::endl;
         std::cout << "Total sum is : " + std::to_string(sum) << std::endl;
         std::cout << "Total traversed is : " + std::to_string(numOfNodes) << std::endl;
+         */
+        solution->setInitialCost(init->getCost());
+        solution->setNumOfNodes(numOfNodes);
         return solution;
       }
       for (State<S> *node : *searchableItem->getAllPossibleStates(current)) {

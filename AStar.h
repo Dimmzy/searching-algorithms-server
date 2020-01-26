@@ -7,11 +7,11 @@
 
 
 
-template <typename T>
-class AStar : public Searcher<T> {
+template <typename T, typename S>
+class AStar : public Searcher<T,S> {
  public:
-  Solution<T> *search(Searchable<T> *searchableItem) override {
-    std::priority_queue<State<T>*>
+  Solution<S> *search(Searchable<T> *searchableItem) override {
+    std::priority_queue<State<S>*>
 
 
   }

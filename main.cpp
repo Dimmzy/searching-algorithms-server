@@ -94,9 +94,9 @@ int main(int size, char *args[]) {
       matrix->addCell(new State<std::vector<int>>(cell, myMat[i][j]));
     }
   }
-  matrix->printMatrix();
   auto bfs = new BFS<Matrix, std::vector<int>>();
   auto sol = bfs->search(matrix);
+  sol->reversePath();
   sol->printNodes();
   //Searchable<std::vector<int>>* searchable = testMat;
   //DFS<std::vector<int>>* dfs = new ::DFS<std::vector<int>>();
