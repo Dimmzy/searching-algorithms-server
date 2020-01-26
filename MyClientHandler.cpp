@@ -51,14 +51,14 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     rmLinebreak(input);
   }
   close(input_stream);
-  auto* init = new State<std::vector<int>>(start,inputMatrix[start.at(0)][start.at(1)]);
-  auto* goal = new State<std::vector<int>>(end,inputMatrix[end.at(0)][end.at(1)]);
+  auto* init = new State<std::vector<int>>(&start,inputMatrix[start.at(0)][start.at(1)]);
+  auto* goal = new State<std::vector<int>>(&end,inputMatrix[end.at(0)][end.at(1)]);
   auto* matrix = new Matrix(columns, init, goal);
   /* Inserts the states into our matrix */
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
-      std::vector<int> cell{rows,columns};
-      matrix->addCell(new State<std::vector<int>>(cell,inputMatrix[rows][columns]));
+      std::vector<int> cell{i,j};
+      matrix->addCell(new State<std::vector<int>>(&cell,inputMatrix[i][j]));
     }
   }
 }

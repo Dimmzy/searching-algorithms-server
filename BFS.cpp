@@ -4,7 +4,6 @@
 
 template<typename T>
 Solution<T> BFS<T>::search(Searchable<T>* searchableItem) {
-
   std::vector<State<T>> path;
   std::queue<State<T>> queue;
   State<T> init = searchableItem->getInitialState();
@@ -28,6 +27,5 @@ Solution<T> BFS<T>::search(Searchable<T>* searchableItem) {
       }
     }
   }
-  searchableItem->reset();
   return new Solution<std::vector<int>>(path);
 }

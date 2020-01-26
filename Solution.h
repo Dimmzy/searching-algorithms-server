@@ -5,35 +5,22 @@
 #ifndef FLIGHTSIMULATORPART2__SOLUTION_H_
 #define FLIGHTSIMULATORPART2__SOLUTION_H_
 #include <vector>
+#include <algorithm>
 #include "State.h"
+#include <iostream>
+
 template <typename T>
 class Solution {
  private:
-  std::vector<State<T>> listOfNodes;
+  std::vector<State<T>*> path;
  public:
-  /*
-  Solution<T> () {
-    //this->listOfNodes = new std::vector<State<T>>();
-  }
-  ~Solution() {
-    //~this->listOfNodes;
-  }
-   */
-  void addNode(State<T>& curState) {
-    this->listOfNodes.emplace_back(curState);
-  }
-  void reverse() {
-    this->listOfNodes.reserve(this->listOfNodes.begin(), this->listOfNodes.end());
-  }
-
-  Solution<T> backTrace(State<T>& finalNode, State<T>& startNode) {
-    while(!finalNode.equals(startNode)) {
-      this->addNode(finalNode);
-      finalNode = finalNode.getPreviousNode();
+  void printNodes() {
+    for (State<T>* node : this->path) {
+      std::cout << node->getCost() << std::endl;
     }
-    this->addNode(startNode);
-    this->reverse();
-    return this;
+  }
+  void addNode(State<T>* node) {
+    this->path.push_back(node);
   }
 };
 

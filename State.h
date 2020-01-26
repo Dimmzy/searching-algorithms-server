@@ -4,14 +4,15 @@
 template<typename T>
 class State {
  private:
-  T state;
+  T* state;
   std::string state_name; // the state_name represented by a string
   double cost; // the cost to cross this state_name
-  State<T> *cameFrom; // the state_name we came from to this state_name (setter)
+  State<T>* cameFrom; // the state_name we came from to this state_name (setter)
   double costFromInitial; //cost to reach this state_name (set by a setter)
   bool visited;
 
  public:
+  State<T> () = default;
   State<T>(std::string &state, double cost) {
     this->state_name = state;
     this->cost = cost;
@@ -20,7 +21,7 @@ class State {
     visited = false;
   }
 
-  State<T>(T& state, double cost) {
+  State<T>(T* state, double cost) {
     this->state = state;
     this->cost = cost;
     this->cameFrom = nullptr;
@@ -28,8 +29,15 @@ class State {
     visited = false;
   }
 
-  bool equals(State<T> &otherState) {
-    return this->state_name.compare(otherState.getState()) == 0;
+  bool equals(State<T>* otherState) {
+    return this->state_name.compare(otherState->getState_Name()) == 0;
+  }
+  void setVisited(bool v) {
+    this->visited = v;
+  }
+
+  bool checkVisited() {
+    return this->visited;
   }
 
   void setCostFromInitial(const double cost) {
@@ -39,15 +47,7 @@ class State {
     return this->costFromInitial;
   }
 
-  void setVisited(bool v) {
-    this->visited = v;
-  }
-
-  bool checkVisited() {
-    return this->visited;
-  }
-
-  T getState() {
+  T* getState() {
     return this->state;
   }
 
@@ -64,7 +64,7 @@ class State {
     return this->cameFrom;
   }
   void setPreviousNode(State<T> *previousNode) {
-    this->cameFrom - previousNode;
+    this->cameFrom = previousNode;
   }
 };
 

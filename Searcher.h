@@ -4,10 +4,13 @@
 #include "Searcher.h"
 #include "Solution.h"
 #include "Searchable.h"
-template <typename T>
+#include "Matrix.h"
+
+template <typename T, typename S>
 class Searcher {
  public:
-  virtual Solution<T> search(Searchable<T>* searchableItem) = 0;
+  virtual std::string getName() = 0;
+  virtual Solution<S>* search(Matrix* searchableItem) = 0;
 };
 
 #endif //SEARCHER_H_
