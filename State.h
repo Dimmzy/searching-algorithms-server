@@ -23,6 +23,7 @@ class State {
 
   State<T>(T* state, double cost) {
     this->state = state;
+    this->state_name = "(" + std::to_string(state->at(0)) + "," + std::to_string(state->at(1)) + ")";
     this->cost = cost;
     this->cameFrom = nullptr;
     this->costFromInitial = 0;

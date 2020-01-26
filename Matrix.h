@@ -9,10 +9,8 @@ class Matrix : public Searchable<std::vector<int>> {
   Matrix(int size, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state);
   void addCell(State<std::vector<int>> *state);
   State<std::vector<int>>* getInitialState() override;
-  void setGoalState(State<std::vector<int>>* state);
-  void setInitialState(State<std::vector<int>>* state);
   bool isGoalState(State<std::vector<int>>* curState) override;
-  std::vector<State<std::vector<int>>*> getAllPossibleStates(State<std::vector<int>>* curState) override;
+  std::vector<State<std::vector<int>>*>* getAllPossibleStates(State<std::vector<int>>* curState) override;
   void printMatrix();
  private:
   int size;

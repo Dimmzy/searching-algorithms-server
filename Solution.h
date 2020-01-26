@@ -15,7 +15,9 @@ class Solution {
   std::vector<State<T>*> path;
  public:
   void printNodes() {
+    double sum = 0;
     for (State<T>* node : this->path) {
+      sum += node->getCost();
       std::cout << node->getCost() << std::endl;
     }
   }

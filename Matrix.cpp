@@ -1,7 +1,6 @@
 
 #include "Matrix.h"
 #include <string>
-#include <utility>
 #include <iostream>
 
 State<std::vector<int>> *Matrix::getInitialState() {
@@ -9,27 +8,27 @@ State<std::vector<int>> *Matrix::getInitialState() {
 }
 
 bool Matrix::isGoalState(State<std::vector<int>> *curState) {
-  return this->goalState == curState;
+  return this->goalState->equals(curState);
 }
 
-std::vector<State<std::vector<int>> *> Matrix::getAllPossibleStates(State<std::vector<int>> *curState) {
+std::vector<State<std::vector<int>> *>* Matrix::getAllPossibleStates(State<std::vector<int>> *curState) {
   int row = curState->getState()->at(0);
   int column = curState->getState()->at(1);
-  auto neighbors = new std::vector<State<std::vector<int>> *>;
+  auto neighbors = new std::vector<State<std::vector<int>>*>;
   /* TODO: Make a for loop (?) */
   if (validateCell(row + 1, column))
-    neighbors.push_back(this->matrix[row + 1][column]);
+    neighbors->push_back(this->matrix[row + 1][column]);
   if (validateCell(row, column + 1))
-    neighbors.push_back(this->matrix[row][column + 1]);
+    neighbors->push_back(this->matrix[row][column + 1]);
   if (validateCell(row - 1, column))
-    neighbors.push_back(this->matrix[row - 1][column]);
+    neighbors->push_back(this->matrix[row - 1][column]);
   if (validateCell(row, column - 1))
-    neighbors.push_back(this->matrix[row][column - 1]);
+    neighbors->push_back(this->matrix[row][column - 1]);
   return neighbors;
 }
 
 bool Matrix::validateCell(int row, int column) {
-  if (row <= this->size && column <= this->size && row >= 0 && column >= 0) {
+  if (row < this->size && column < this->size && row >= 0 && column >= 0) {
     return (this->matrix[row][column]->getCost() != -1);
   }
   return false;
@@ -37,12 +36,6 @@ bool Matrix::validateCell(int row, int column) {
 
 void Matrix::addCell(State<std::vector<int>> *state) {
   this->matrix[state->getState()->at(0)][state->getState()->at(1)] = state;
-}
-void Matrix::setGoalState(State<std::vector<int>> *state) {
-  this->goalState = state;
-}
-void Matrix::setInitialState(State<std::vector<int>> *state) {
-  this->initialState = state;
 }
 
 Matrix::Matrix(int size, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state)
