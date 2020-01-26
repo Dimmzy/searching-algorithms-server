@@ -10,7 +10,7 @@ template <typename T, typename S>
 class Searcher {
  public:
   virtual std::string getName() = 0;
-  virtual Solution<S>* search(Matrix* searchableItem) = 0;
+  virtual Solution<S>* search(T* searchableItem) = 0;
 };
 
 #endif //SEARCHER_H_

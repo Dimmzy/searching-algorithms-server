@@ -11,7 +11,9 @@ template <typename T, typename S>
 class AStar : public Searcher<T,S> {
  public:
   Solution<S> *search(Searchable<T> *searchableItem) override {
-    std::priority_queue<State<S>*>
+    std::vector<State<T>*> openList;
+    std::vector<State<T>*> closedList;
+    openList.push_back()
 
 
   }
