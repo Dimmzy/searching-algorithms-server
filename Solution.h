@@ -24,8 +24,6 @@ class Solution {
       Direction(prev->at(0),node->getState()->at(0),prev->at(1),node->getState()->at(1),node);
     }
     std::cout << std::endl;
-    std::cout << "Number of nodes traversed is " + std::to_string(numOfNodesTraversed) << std::endl;
-
   }
   void addNode(State<T>* node) {
     this->path.push_back(node);

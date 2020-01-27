@@ -12,7 +12,7 @@ class BFS : public Searcher<T,S> {
  private:
   int numOfNodes;
  public:
-  Solution<S> *search(Matrix *searchableItem) override {
+  Solution<S> *search(T* searchableItem) override {
     numOfNodes = 0;
     std::vector<State<S>*> visited;
     std::queue<State<S>*> bfsQueue;

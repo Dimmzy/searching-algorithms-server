@@ -7,6 +7,10 @@ State<std::vector<int>> *Matrix::getInitialState() {
   return this->initialState;
 }
 
+State<std::vector<int>>* Matrix::getGoalState() {
+  return this->goalState;
+}
+
 bool Matrix::isGoalState(State<std::vector<int>> *curState) {
   return this->goalState->equals(curState);
 }
