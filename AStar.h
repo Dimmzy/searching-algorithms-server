@@ -4,18 +4,18 @@
 #include "Searcher.h"
 #include <vector>
 #include <queue>
+#include <string>
 
 /**
  * AStar is a Path Finding algorithm that attempts to find the best (over close-to best) path with minimal cost from
  * the starting node to the goal node.
  * We'll implement the Searcher template to handle it.
- * @tparam T The Searchable object we'll find the path of
  * @tparam S The State object that denotes a state in our searchable object.
  */
-template<typename T, typename S>
-class AStar : public Searcher<T, S> {
+template<typename S>
+class AStar : public Searcher<S> {
  public:
-  Solution<S> *search(T *searchableItem) override {
+  Solution<S> *search(Searchable<S> *searchableItem) override {
     /* Initialize Open and Closed list */
     int numOfNodes = 0;
     std::vector<State<S> *> openList;
@@ -79,6 +79,9 @@ class AStar : public Searcher<T, S> {
    */
   int manhattanDistance(State<S> *current, State<S> *goal) {
     return abs(current->getX() - goal->getX()) + abs(current->getY() - goal->getY());
+  }
+  std::string getName() override {
+    return "AStar";
   }
 };
 

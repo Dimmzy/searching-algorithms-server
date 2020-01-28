@@ -8,13 +8,13 @@
 
 /**
  * The Searcher Interface defines a class that can search through a searchable object to find a solution.
- * @tparam T
  * @tparam S
  */
-template <typename T, typename S>
+template <typename S>
 class Searcher {
  public:
-  virtual Solution<S>* search(T* searchableItem) = 0;
+  virtual std::string getName() = 0;
+  virtual Solution<S>* search(Searchable<S>* searchableItem) = 0;
 };
 
 #endif //SEARCHER_H_

@@ -120,6 +120,10 @@ class State {
   void setPreviousNode(State<T> *previousNode) {
     this->cameFrom = previousNode;
   }
+
+  bool operator==(State<T>* state) {
+    return this->getState_Name().compare(state->getState_Name()) == 0;
+  }
 };
 
 #endif //STATE_H_

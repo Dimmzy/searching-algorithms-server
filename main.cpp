@@ -6,6 +6,8 @@
 #include "BFS.h"
 #include "Searchable.h"
 #include "AStar.h"
+#include "DFS.h"
+#include "BestFirstSearch.h"
 
 int main(int size, char *args[]) {
   //boot::Main::main(size, args);
@@ -95,9 +97,14 @@ int main(int size, char *args[]) {
       matrix->addCell(new State<std::vector<int>>(cell, myMat[i][j]));
     }
   }
-  auto astar = new AStar<Matrix, std::vector<int>>();
-  auto sol = astar->search(matrix);
-  sol->reversePath();
+
+  //auto astar = new AStar<std::vector<int>>();
+  //auto sol = astar->search(matrix);
+  Searchable<std::vector<int>>* searchable = matrix;
+  Searcher<std::vector<int>>* searcher = ::new BestFirstSearch<std::vector<int>>();
+
+  ObjectAdapter<std::vector<int>>* object_adapter = new ObjectAdapter<std::vector<int>>(searcher);
+  Solution<std::vector<int>>* sol = object_adapter->solve(searchable);
   sol->printNodes();
   /* BFS Test
   auto bfs = new BFS<Matrix, std::vector<int>>();

@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include "Searchable.h"
 
 /**
  * Breadth First Search implementation, we'll use it to iterate through the graph until we hit our goal node
@@ -13,12 +14,12 @@
  * @tparam T The Searchable object we'll find the path of
  * @tparam S The State object that denotes a state in our searchable object.
  */
-template<typename T, typename S>
-class BFS : public Searcher<T,S> {
+template<typename S>
+class BFS : public Searcher<S> {
  private:
   int numOfNodes;
  public:
-  Solution<S> *search(T* searchableItem) override {
+  Solution<S> *search(Searchable<S>* searchableItem) override {
     numOfNodes = 0; // Used as a counter to count how many nodes we've checked as a complexity indicator
     std::vector<State<S>*> visited; // Visited nodes
     std::queue<State<S>*> bfsQueue; // Node queue for nodes to check
@@ -59,6 +60,10 @@ class BFS : public Searcher<T,S> {
    */
   int getNumOfNodes() {
     return this->numOfNodes;
+  }
+
+  std::string getName() override {
+    return "BFS";
   }
 };
 

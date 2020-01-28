@@ -26,7 +26,7 @@ class Solution {
     // Traverses the path, appending to the string each traversal through the nodes and it's direction and cost.
     for (State<T>* node : this->path) {
       costFromInitial += node->getCost();
-      node->setCostFromInitial(costFromInitial);
+      //node->setCostFromInitial(costFromInitial);
       T* prev = node->getPreviousNode()->getState();
       // Calls direction to append the direction we move in.
       Direction(prev->at(0),node->getState()->at(0),prev->at(1),node->getState()->at(1),node);

@@ -53,7 +53,8 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     while(std::getline(lineStream,cell,',')) {
       if(!columnSet)
         columns++;
-      stringtoHash.append(cell);
+      /*TODO: the hash I comment the line below*/
+      //stringtoHash.append(cell);
       row.push_back(stod(cell));
     }
     columnSet = true;

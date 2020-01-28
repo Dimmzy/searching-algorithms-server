@@ -5,6 +5,7 @@
 #include "Searchable.h"
 #include "Searcher.h"
 #include "Matrix.h"
+#include "Solution.h"
 #include <vector>
 
 /**
@@ -14,23 +15,24 @@
  * @tparam T The Searchable Object template type.
  * @tparam S The State object template type.
  */
-template <typename T,typename S>
-class ObjectAdapter : public Solver<Searchable<T> *, std::string> {
+template <typename T>
+class ObjectAdapter : public Solver<Searchable<T> *, Solution<T>*> {
  public:
-  ObjectAdapter<T,S>(Searcher<T,S>* searcher) {
+  ObjectAdapter<T>(Searcher<T>* searcher) {
     this->searcher = searcher;
   }
 
-  virtual std::string solve(Searchable<T>* problem) {
+  virtual Solution<T>* solve(Searchable<T>* problem) {
     Solution<T>* sol = this->searcher->search(problem);
+    sol->reversePath();
+    return sol;
   }
 
   virtual std::string getName() {
     this->searcher->getName();
   }
-
  private:
-  Searcher<T,S>* searcher;
+  Searcher<T>* searcher;
 };
 
 #endif //OBJECTADAPTER_H_
