@@ -21,7 +21,7 @@ class BestFirstSearch : public Searcher<T> {
   }
 
   ~BestFirstSearch() {
-    //~this->my_priority_queue;
+    delete this->my_priority_queue;
   }
 
   void addToOpenList(State<T>* curState) {

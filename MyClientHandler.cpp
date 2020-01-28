@@ -75,6 +75,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
       matrix->addCell(new State<std::vector<int>>(&cell,inputMatrix[i][j]));
     }
   }
+
 }
 
 /**
