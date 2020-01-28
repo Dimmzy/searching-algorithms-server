@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include "FileCacheManager.h"
+
 #define SOL_FOLDER "Solutions/"
 
 /**
@@ -45,6 +46,7 @@ void FileCacheManager::saveSolution(std::string problem,std::string solution, st
   // Add solution path to cache
   this->solutionCache.insert(std::pair<std::string,std::string>(problem, SOL_FOLDER + fileName));
 }
+
 FileCacheManager::FileCacheManager(std::string solverName) {
 
 }

@@ -1,10 +1,17 @@
-
 #ifndef FLIGHTSIMULATORPART2__ASTAR_H_
 #define FLIGHTSIMULATORPART2__ASTAR_H_
+
 #include "Searcher.h"
 #include <vector>
 #include <queue>
 
+/**
+ * AStar is a Path Finding algorithm that attempts to find the best (over close-to best) path with minimal cost from
+ * the starting node to the goal node.
+ * We'll implement the Searcher template to handle it.
+ * @tparam T The Searchable object we'll find the path of
+ * @tparam S The State object that denotes a state in our searchable object.
+ */
 template<typename T, typename S>
 class AStar : public Searcher<T, S> {
  public:
@@ -65,17 +72,13 @@ class AStar : public Searcher<T, S> {
   }
 
   /**
-   * Manhattan Distance Heuristic function used with the A* Algorithm.
+   * Manhattan Distance Heuristic function used with the A* Algorithm. Used as an heuristic for the A Star algorithm/
    * @param current Current cell
    * @param goal Goal cell
    * @return the sum of the absolute values of the differences in the goal and current x and y coordinates.
    */
   int manhattanDistance(State<S> *current, State<S> *goal) {
     return abs(current->getX() - goal->getX()) + abs(current->getY() - goal->getY());
-  }
-
-  std::string getName() override {
-    return "AStar";
   }
 };
 

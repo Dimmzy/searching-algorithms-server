@@ -1,7 +1,3 @@
-  //
-// Created by haim on 16/01/2020.
-//
-
 #include "StringReverser.h"
 #include <algorithm>
 
@@ -12,6 +8,3 @@ std::string StringReverser::solve(std::string problem) {
   return problem;
 }
 
-std::string StringReverser::getName() {
-  return this->solverName;
-}

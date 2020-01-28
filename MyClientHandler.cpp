@@ -1,17 +1,27 @@
-
 #include <sstream>
 #include "MyClientHandler.h"
 #include "Matrix.h"
+#include "ObjectAdapter.h"
+
+/* Maximal amount of information we're ready to receive */
 #define BUFFER_SIZE 1024
 
+/**
+ * The handleClient receives information through the input_stream, translates it into a problem using ObjectAdapter,
+ * and solves it through it. It then sends the solution through output_stream to the requesting client.
+ * @param input_stream the input stream we'll receive our problem from
+ * @param output_stream the output stream we'll send our problem to
+ */
 void MyClientHandler::handleClient(int input_stream, int output_stream) {
   char buffer[BUFFER_SIZE] = {0};
   int columns = 0;
   bool columnSet = false;
   int rows = 0;
+  /* We'll append to this string all of the information received so we can have a hash of the problem to save as name */
+  std::string stringToHash;
   std::vector<int> start;
   std::vector<int> end;
-  int valread = read(input_stream, buffer,BUFFER_SIZE);
+  read(input_stream, buffer,BUFFER_SIZE);
   std::string line, input(buffer);
   std::vector<std::vector<double>> inputMatrix;
   rmLinebreak(input);
@@ -22,6 +32,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     if (rows == columns && columns != 0) {
       /* Gets the starting cell */
       while(std::getline(lineStream,cell,',')) {
+        stringToHash.append(cell);
         start.push_back(stod(cell));
       }
       /* Reads and gets the ending cell */
@@ -30,6 +41,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
       rmLinebreak(input);
       std::stringstream lineStreamEnd(input);
       while(std::getline(lineStreamEnd,cell,',')) {
+        stringToHash.append(cell);
         end.push_back(stod(cell));
       }
       /* We got start cell and end cell, finished reading! */
@@ -41,6 +53,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     while(std::getline(lineStream,cell,',')) {
       if(!columnSet)
         columns++;
+      stringtoHash.append(cell);
       row.push_back(stod(cell));
     }
     columnSet = true;
@@ -63,6 +76,10 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   }
 }
 
+/**
+ * Removes linebreaks from passed string.
+ * @param str the string we'll remove LB from/
+ */
 void MyClientHandler::rmLinebreak(std::string& str) {
   str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
   str.erase(std::remove(str.begin(),str.end(),'\r'),str.end());
