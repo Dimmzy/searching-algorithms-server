@@ -10,7 +10,7 @@
  * @return return if we have a solution saved in cache
  */
 bool FileCacheManager::findSolution(std::string problem) {
-  return this->solutionCache.find(problem) != this->solutionCache.end();
+  return this->solutionCache->find(problem) != this->solutionCache->end();
 }
 
 /**
@@ -18,7 +18,7 @@ bool FileCacheManager::findSolution(std::string problem) {
  * @return read the solution file and return the solution string
  */
 std::string FileCacheManager::getSolution(std::string problem) {
-  std::ifstream solFile (this->solutionCache.at(problem));
+  std::ifstream solFile (this->solutionCache->at(problem));
   std::string solution;
   if(solFile.is_open()) {
     std::cout << "Getting Solution\n" << std::endl;
@@ -44,5 +44,5 @@ void FileCacheManager::saveSolution(std::string problem,std::string solution) {
   } else
     std::cout << "Couldn't open file" << std::endl;
   // Add solution path to cache
-  this->solutionCache.insert(std::pair<std::string,std::string>(problem, SOL_FOLDER + problem));
+  this->solutionCache->insert(std::pair<std::string,std::string>(problem, SOL_FOLDER + problem));
 }

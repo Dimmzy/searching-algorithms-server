@@ -77,3 +77,14 @@ Matrix::Matrix(int size, State<std::vector<int>> *initial_state, State<std::vect
       std::vector<std::vector<State<std::vector<int>> *>>(size, std::vector<State<std::vector<int>> *>(size, nullptr));
 }
 
+void Matrix::printMatrix() {
+  for(int i = 0; i < this->size; i++) {
+    for(int j = 0; j < this->size; j++) {
+      std::cout << this->matrix[i][j]->getCost();
+      std::cout << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "FUCK 2D ARRAYS\n";
+}
+

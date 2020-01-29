@@ -20,6 +20,9 @@ class Solution {
   int pathLength = 0;
   int runningCost = 0;
  public:
+  Solution<T>() {
+
+  }
   /**
    * Handles creating the solution string we'll send to our client.
    */

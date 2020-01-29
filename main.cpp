@@ -1,4 +1,4 @@
-#include "MySerialServer.h"
+#include "MyParallerServer.h"
 #include "Matrix.h"
 #include "State.h"
 #include "ObjectAdapter.h"
@@ -11,7 +11,8 @@
 #include "BestFirstSearch.h"
 
 int main(int size, char *args[]) {
-  //boot::Main::main(size, args);
+  boot::Main::main(size, args);
+  /*
 
   int myMat[37][37] =
       {8, 2, 8, 6, 8, 2, 12, 2, 4, 1, 9, 9, 5, 12, 1, 1, 1, 2, 7, 3, 1, 6, 9, 3, 9, 7, 7, 9, 5, 6, 4, 5, 1, 6, -1, 1, 7,
@@ -111,6 +112,7 @@ int main(int size, char *args[]) {
   std::cout << "------>BEST FIRST SEARCH<------\n" << ob_b->solve(matrix) << std::endl;
   std::cout << "------>BFS<------\n" << ob_c->solve(matrix) << std::endl;
   std::cout << "------>DFS<------\n" << ob_d->solve(matrix) << std::endl;
+   */
   return 0;
 }
 

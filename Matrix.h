@@ -17,6 +17,7 @@ class Matrix : public Searchable<std::vector<int>> {
   State<std::vector<int>>* getGoalState() override;
   bool isGoalState(State<std::vector<int>>* curState) override;
   std::vector<State<std::vector<int>>*>* getAllPossibleStates(State<std::vector<int>>* curState) override;
+  void printMatrix();
  private:
   int size;
   State<std::vector<int>>* initialState;

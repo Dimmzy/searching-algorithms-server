@@ -47,13 +47,14 @@ void MyParallerServer::start(int socketfd, sockaddr_in address, ClientHandler *c
       std::cout << "Connected" << std::endl;
       this->threadVector.emplace_back(std::thread(&MyParallerServer::handleClientFromServer, this, client_handler,
           client_socket));
-      client_handler->handleClient(client_socket, client_socket);
+      //client_handler->handleClient(client_socket, client_socket);
     }
   }
   this->stop(socketfd);
 }
 
 void MyParallerServer::handleClientFromServer(ClientHandler* client_handler, int sockfd) {
+
   client_handler->handleClient(sockfd, sockfd);
 }
 

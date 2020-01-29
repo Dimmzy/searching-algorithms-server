@@ -65,7 +65,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     input = buffer;
     rmLinebreak(input);
   }
-  close(input_stream);
+  //close(input_stream);
   std::size_t problemName = std::hash<std::string>{}(stringToHash);
   char* solution;
   if (this->cacheManager->findSolution(std::to_string(problemName))) {
@@ -81,6 +81,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
         matrix->addCell(new State<std::vector<int>>(&cell, inputMatrix[i][j]));
       }
     }
+    //matrix->printMatrix();
     /* Creates our Object Adapter that'll handle solving the problem using the A Star path finding algorithm */
     auto objectAdapter = new ObjectAdapter<std::vector<int>>(new AStar<std::vector<int>>());
     solution = &objectAdapter->solve(matrix)[0]; // Converts our str answer to a char array
