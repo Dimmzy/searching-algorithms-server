@@ -52,6 +52,7 @@ class AStar : public Searcher<S> {
         }
       }
     }
+    return nullptr;
   }
 
   /**

@@ -46,6 +46,7 @@ class DFS : public Searcher<S> {
         }
       }
     }
+    return nullptr;
   }
 };
 

@@ -54,6 +54,7 @@ class BFS : public Searcher<S> {
         }
       }
     }
+    return nullptr;
   }
 };
 

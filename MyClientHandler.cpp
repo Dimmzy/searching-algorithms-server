@@ -55,8 +55,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     while(std::getline(lineStream,cell,',')) {
       if(!columnSet)
         columns++;
-      /*TODO: the hash I comment the line below*/
-      //stringtoHash.append(cell);
+      stringToHash.append(cell);
       row.push_back(stod(cell));
     }
     columnSet = true;
@@ -85,7 +84,11 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     /* Creates our Object Adapter that'll handle solving the problem using the A Star path finding algorithm */
     auto objectAdapter = new ObjectAdapter<std::vector<int>>(new AStar<std::vector<int>>());
     solution = &objectAdapter->solve(matrix)[0]; // Converts our str answer to a char array
-    this->cacheManager->saveSolution(problemName,solution);
+    if (strcmp(solution, "Something went wrong!") == 0) {
+      write(output_stream, "Can't solve problem!", BUFFER_SIZE);
+      return;
+    }
+    this->cacheManager->saveSolution(std::to_string(problemName), solution);
   }
   write(output_stream,solution,BUFFER_SIZE); // Sends the solution back to the client
 

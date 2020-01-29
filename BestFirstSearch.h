@@ -8,11 +8,11 @@
 #include "MyPriorityQueue.h"
 #include <string>
 #include "StateComparator.h"
-template <typename T>
+template<typename T>
 class BestFirstSearch : public Searcher<T> {
  private:
-  MyPriorityQueue* my_priority_queue;
-  int evaluatedNodes;
+  MyPriorityQueue *my_priority_queue{};
+  int evaluatedNodes{};
 
  public:
   BestFirstSearch() {
@@ -24,13 +24,13 @@ class BestFirstSearch : public Searcher<T> {
     delete this->my_priority_queue;
   }
 
-  void addToOpenList(State<T>* curState) {
+  void addToOpenList(State<T> *curState) {
     this->my_priority_queue->push(curState);
   }
 
-  State<T>* popOpenList() {
+  State<T> *popOpenList() {
     this->evaluatedNodes++;
-    State<T> * state = this->my_priority_queue->top();
+    State<T> *state = this->my_priority_queue->top();
     this->my_priority_queue->pop();
     return state;
   }
@@ -60,22 +60,22 @@ class BestFirstSearch : public Searcher<T> {
           i. If it is not in OPEN add it to OPEN.
           ii. Otherwise, adjust its priority in OPEN done
    */
-  Solution<T>* search(Searchable<T>* searchableItem) override {
+  Solution<T> *search(Searchable<T> *searchableItem) override {
     int nodesTraversed = 0;
-    Solution<T>* solution = new Solution<T>();
-    std::vector<State<T> *>* succerssors;
-    State<T>* initialState = searchableItem->getInitialState();
+    auto *solution = new Solution<T>();
+    std::vector<State<T> *> *succerssors;
+    State<T> *initialState = searchableItem->getInitialState();
     initialState->setCostFromInitial(initialState->getCost());
     addToOpenList(initialState);
-    std::set<State<T> *, StateComparator<T>>* closed = new std::set<State<T> *, StateComparator<T>>();
+    auto *closed = new std::set<State<T> *, StateComparator<T>>();
     while (openListSize() > 0) {
       nodesTraversed++;
-      State<T>* n = popOpenList(); // removes the best state
+      State<T> *n = popOpenList(); // removes the best state
       closed->emplace(n);
       if (n->equals(searchableItem->getGoalState())) {
         solution->setNumOfNodes(nodesTraversed);
         /* Backtrace and report to Solution Class */
-        while(!n->equals(initialState)) {
+        while (!n->equals(initialState)) {
           //std::cout << n->getState_Name() << std::endl;
           solution->addNode(n);
           n = n->getPreviousNode();
@@ -88,17 +88,16 @@ class BestFirstSearch : public Searcher<T> {
       // calling the delegated method, returns a vector of states with n as a parent
       succerssors = searchableItem->getAllPossibleStates(n);
 
-      for(State<T>* state : *succerssors) {
+      for (State<T> *state : *succerssors) {
         //std::cout << state->getState_Name() << std::endl;
-        if(closed->find(state) == closed->end() && this->my_priority_queue->find(state) ==
-            this->my_priority_queue->end())
-        {
+        if (closed->find(state) == closed->end() && this->my_priority_queue->find(state) ==
+            this->my_priority_queue->end()) {
           state->setPreviousNode(n);
           state->setCostFromInitial(state->getCost() + n->getCostFromInitial());
           addToOpenList(state);
         } else {
-          if(n->getCostFromInitial() + state->getCost() < state->getCostFromInitial()) {
-            if(this->my_priority_queue->find(state) != this->my_priority_queue->end()) {
+          if (n->getCostFromInitial() + state->getCost() < state->getCostFromInitial()) {
+            if (this->my_priority_queue->find(state) != this->my_priority_queue->end()) {
               addToOpenList(state);
             } else {
               this->my_priority_queue->fixPlaceInPriorityQueue(state);
@@ -107,6 +106,7 @@ class BestFirstSearch : public Searcher<T> {
         }
       }
     }
+    return nullptr;
+  }
 };
-
 #endif //BESTFIRSTSEARCH_H_

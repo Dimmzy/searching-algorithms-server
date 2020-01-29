@@ -10,7 +10,7 @@ void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
   std::string problem, solution, fileName;
 
 
-  int valread = read(input_stream, bufferProblem, BUFFERSIZE);
+  read(input_stream, bufferProblem, BUFFERSIZE);
 
   problem = bufferProblem;
   //remove '\n', '\r' characters
@@ -19,14 +19,14 @@ void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
   //The connection with the client will stop as the client types "end"
   while(problem != "end")
   {
-    fileName = problem + '.' + this->solver->getName();
+    fileName = problem + '.' + "StringReverser";
     //first check if we have already solved this problem before
     if(this->cache_manager->findSolution(problem)) {
       std::cout << "Found Solution for " + fileName << std::endl;
       solution = this->cache_manager->getSolution(problem) + '\n';
     } else { //it is a brand new problem
       solution = this->solver->solve(problem) + '\n';
-      this->cache_manager->saveSolution(problem, solution, fileName);
+      this->cache_manager->saveSolution(problem, solution);
     }
     //clean the buffer of the solution
     bzero(bufferSolution, BUFFERSIZE);
@@ -36,7 +36,7 @@ void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
     //clean the buffer of the problem
     bzero(bufferProblem, BUFFERSIZE);
     //input new problem to solve or "end"-to stop the connection with the server
-    valread = read(input_stream, bufferProblem, BUFFERSIZE);
+    read(input_stream, bufferProblem, BUFFERSIZE);
     problem = bufferProblem;
     //remove '\n', '\r' characters
     problem.erase(std::remove(problem.begin(), problem.end(), '\n'), problem.end());

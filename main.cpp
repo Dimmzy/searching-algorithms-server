@@ -88,13 +88,13 @@ int main(int size, char *args[]) {
         5, 6}};
   std::vector<int> cell1{0, 0};
   std::vector<int> cell2{36, 36};
-  State<std::vector<int>> *initialState = new State<std::vector<int>>(&cell1, 8);
-  State<std::vector<int>> *goalState = new State<std::vector<int>>(&cell2, 6);
+  auto *initialState = new State<std::vector<int>>(&cell1, 8);
+  auto *goalState = new State<std::vector<int>>(&cell2, 6);
   auto matrix = new Matrix(37, initialState, goalState);
   int rows = 37, columns = 37;
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
-      std::vector<int> *cell = new std::vector<int>{i, j};
+      auto *cell = new std::vector<int>{i, j};
       matrix->addCell(new State<std::vector<int>>(cell, myMat[i][j]));
     }
   }
@@ -111,9 +111,6 @@ int main(int size, char *args[]) {
   std::cout << "------>BEST FIRST SEARCH<------\n" << ob_b->solve(matrix) << std::endl;
   std::cout << "------>BFS<------\n" << ob_c->solve(matrix) << std::endl;
   std::cout << "------>DFS<------\n" << ob_d->solve(matrix) << std::endl;
-
-
-
   return 0;
 }
 

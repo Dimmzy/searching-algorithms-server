@@ -27,18 +27,16 @@ class ObjectAdapter : public Solver<Matrix*, std::string> {
    * @param problem the Matrix we'll solve path finding for
    * @return the string representing the shortest path from the initial node to the goal node
    */
-  virtual std::string solve(Matrix* problem) {
-    Solution<T>* sol = this->searcher->search(problem);
+  std::string solve(Matrix *problem) override {
+    Solution<T> *sol = this->searcher->search(problem);
+    if (sol == nullptr) {
+      return "Something went wrong!";
+    }
     std::cout << "Num of nodes is " + std::to_string(sol->getNumofNodes()) << std::endl;
     std::cout << "Path length is " + std::to_string(sol->getPathLength()) << std::endl;
     sol->reversePath();
     std::string solution = sol->printSolution();
     return solution;
-  }
-
-
-  virtual std::string getName() {
-    this->searcher->getName();
   }
 
 
