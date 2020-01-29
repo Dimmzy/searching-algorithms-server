@@ -7,6 +7,7 @@
 #include "Searchable.h"
 #include "AStar.h"
 #include "DFS.h"
+#include "DFS.h"
 #include "BestFirstSearch.h"
 
 int main(int size, char *args[]) {
@@ -98,27 +99,21 @@ int main(int size, char *args[]) {
     }
   }
 
-  //auto astar = new AStar<std::vector<int>>();
-  //auto sol = astar->search(matrix);
-  Searchable<std::vector<int>>* searchable = matrix;
-  Searcher<std::vector<int>>* searcher = ::new BestFirstSearch<std::vector<int>>();
+  auto a_star = new AStar<std::vector<int>>();
+  auto b_firstsearch = new BestFirstSearch<std::vector<int>>();
+  auto bfs = new BFS<std::vector<int>>();
+  auto dfs = new DFS<std::vector<int>>();
+  auto ob_a = new ::ObjectAdapter<std::vector<int>>(a_star);
+  auto ob_b = new ::ObjectAdapter<std::vector<int>>(b_firstsearch);
+  auto ob_c = new ::ObjectAdapter<std::vector<int>>(bfs);
+  auto ob_d = new ::ObjectAdapter<std::vector<int>>(dfs);
+  std::cout << "------>A*<------\n" << ob_a->solve(matrix) << std::endl;
+  std::cout << "------>BEST FIRST SEARCH<------\n" << ob_b->solve(matrix) << std::endl;
+  std::cout << "------>BFS<------\n" << ob_c->solve(matrix) << std::endl;
+  std::cout << "------>DFS<------\n" << ob_d->solve(matrix) << std::endl;
 
-  ObjectAdapter<std::vector<int>>* object_adapter = new ObjectAdapter<std::vector<int>>(searcher);
-  Solution<std::vector<int>>* sol = object_adapter->solve(searchable);
-  sol->printNodes();
-  /* BFS Test
-  auto bfs = new BFS<Matrix, std::vector<int>>();
-  auto sol = bfs->search(matrix);
-  sol->reversePath();
-  sol->printNodes();
-  */
-  //Searchable<std::vector<int>>* searchable = testMat;
-  //DFS<std::vector<int>>* dfs = new ::DFS<std::vector<int>>();
-  //Searcher<std::vector<int>>* searcher = ::new DFS<std::vector<int>>();
-  /*
-  ObjectAdapter<std::vector<int>>* object_adapter = new ObjectAdapter<std::vector<int>>(searcher);
-  object_adapter->solve(searchable);
-  */
+
+
   return 0;
 }
 

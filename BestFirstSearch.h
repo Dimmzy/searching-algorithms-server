@@ -61,6 +61,7 @@ class BestFirstSearch : public Searcher<T> {
           ii. Otherwise, adjust its priority in OPEN done
    */
   Solution<T>* search(Searchable<T>* searchableItem) override {
+    int nodesTraversed = 0;
     Solution<T>* solution = new Solution<T>();
     std::vector<State<T> *>* succerssors;
     State<T>* initialState = searchableItem->getInitialState();
@@ -68,17 +69,18 @@ class BestFirstSearch : public Searcher<T> {
     addToOpenList(initialState);
     std::set<State<T> *, StateComparator<T>>* closed = new std::set<State<T> *, StateComparator<T>>();
     while (openListSize() > 0) {
+      nodesTraversed++;
       State<T>* n = popOpenList(); // removes the best state
-
       closed->emplace(n);
       if (n->equals(searchableItem->getGoalState())) {
+        solution->setNumOfNodes(nodesTraversed);
         /* Backtrace and report to Solution Class */
         while(!n->equals(initialState)) {
           //std::cout << n->getState_Name() << std::endl;
           solution->addNode(n);
           n = n->getPreviousNode();
         }
-        //solution->setInitialCost(initialState->getCost());
+        solution->setStartingRunningCost(initialState->getCost());
         //solution->printNodes();
         //solution->reversePath();
         return solution;

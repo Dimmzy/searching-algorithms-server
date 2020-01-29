@@ -17,13 +17,14 @@ class AStar : public Searcher<S> {
  public:
   Solution<S> *search(Searchable<S> *searchableItem) override {
     /* Initialize Open and Closed list */
-    int numOfNodes = 0;
+    int nodesTraversed = 0;
     std::vector<State<S> *> openList;
     State<S> *initial = searchableItem->getInitialState();
     initial->setFScore(0); // Initial's fScore is always zero.
     openList.push_back(initial);
     initial->setCostFromInitial(0);
     while (!openList.empty()) {
+      nodesTraversed++;
       int minIndex = getMinIndex(openList); // Gets the index of the node with the minimal fScore in the OpenList
       State<S> *minNode = openList.at(minIndex);
       if (searchableItem->isGoalState(minNode)) {
@@ -34,7 +35,8 @@ class AStar : public Searcher<S> {
           solution->addNode(minNode);
           minNode = minNode->getPreviousNode();
         }
-        solution->setInitialCost(initial->getCost());
+        solution->setNumOfNodes(nodesTraversed);
+        solution->setStartingRunningCost(initial->getCost());
         return solution;
       }
       openList.erase(openList.begin()+minIndex);

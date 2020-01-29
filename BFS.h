@@ -41,7 +41,7 @@ class BFS : public Searcher<S> {
           solution->addNode(current);
           current = current->getPreviousNode();
         }
-        solution->setInitialCost(init->getCost());
+        solution->setStartingRunningCost(init->getCost());
         solution->setNumOfNodes(numOfNodes);
         return solution;
       }

@@ -16,23 +16,34 @@
  * @tparam S The State object template type.
  */
 template <typename T>
-class ObjectAdapter : public Solver<Searchable<T> *, Solution<T>*> {
+class ObjectAdapter : public Solver<Matrix*, std::string> {
  public:
-  ObjectAdapter<T>(Searcher<T>* searcher) {
+  explicit ObjectAdapter<T>(Searcher<T>* searcher) {
     this->searcher = searcher;
   }
 
-  virtual Solution<T>* solve(Searchable<T>* problem) {
+  /**
+   * Sends the searcher the problem, receives the solution and transforms it into a string we can then send and store
+   * @param problem the Matrix we'll solve path finding for
+   * @return the string representing the shortest path from the initial node to the goal node
+   */
+  virtual std::string solve(Matrix* problem) {
     Solution<T>* sol = this->searcher->search(problem);
+    std::cout << "Num of nodes is " + std::to_string(sol->getNumofNodes()) << std::endl;
+    std::cout << "Path length is " + std::to_string(sol->getPathLength()) << std::endl;
     sol->reversePath();
-    return sol;
+    std::string solution = sol->printSolution();
+    return solution;
   }
+
 
   virtual std::string getName() {
     this->searcher->getName();
   }
+
+
  private:
-  Searcher<T>* searcher;
+  Searcher<T>* searcher; // The searcher we're going to use to find the shortest path
 };
 
 #endif //OBJECTADAPTER_H_
