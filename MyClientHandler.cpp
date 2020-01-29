@@ -67,31 +67,30 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   }
   //close(input_stream);
   std::size_t problemName = std::hash<std::string>{}(stringToHash);
-  char* solution;
+  std::string solution;
   if (this->cacheManager->findSolution(std::to_string(problemName))) {
     solution = &(this->cacheManager->getSolution(std::to_string(problemName)))[0];
   } else {
     auto *init = new State<std::vector<int>>(&start, inputMatrix[start.at(0)][start.at(1)]);
     auto *goal = new State<std::vector<int>>(&end, inputMatrix[end.at(0)][end.at(1)]);
-    auto *matrix = new Matrix(columns, init, goal);
+    auto matrix = new Matrix(columns, init, goal);
     /* Inserts the states into our matrix */
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
-        std::vector<int> cell{i, j};
-        matrix->addCell(new State<std::vector<int>>(&cell, inputMatrix[i][j]));
+        auto *cell = new std::vector<int>{i, j};
+        matrix->addCell(new State<std::vector<int>>(cell, inputMatrix[i][j]));
       }
     }
-    //matrix->printMatrix();
     /* Creates our Object Adapter that'll handle solving the problem using the A Star path finding algorithm */
     auto objectAdapter = new ObjectAdapter<std::vector<int>>(new AStar<std::vector<int>>());
-    solution = &objectAdapter->solve(matrix)[0]; // Converts our str answer to a char array
-    if (strcmp(solution, "Something went wrong!") == 0) {
+    solution = objectAdapter->solve(matrix);
+    if (solution == "Something went wrong!") {
       write(output_stream, "Can't solve problem!", BUFFER_SIZE);
       return;
     }
     this->cacheManager->saveSolution(std::to_string(problemName), solution);
   }
-  write(output_stream,solution,BUFFER_SIZE); // Sends the solution back to the client
+  write(output_stream,solution.c_str(),solution.length()); // Sends the solution back to the client
 
 }
 

@@ -30,10 +30,11 @@ class ObjectAdapter : public Solver<Matrix*, std::string> {
   std::string solve(Matrix *problem) override {
     Solution<T> *sol = this->searcher->search(problem);
     if (sol == nullptr) {
-      //return "Something went wrong!";
+      return "Something went wrong!";
     }
-    std::cout << "Num of nodes is " + std::to_string(sol->getNumofNodes()) << std::endl;
-    std::cout << "Path length is " + std::to_string(sol->getPathLength()) << std::endl;
+    /* Printing pathing information for the graph */
+    // std::cout << "Num of nodes is " + std::to_string(sol->getNumofNodes()) << std::endl;
+    // std::cout << "Path length is " + std::to_string(sol->getPathLength()) << std::endl;
     sol->reversePath();
     std::string solution = sol->printSolution();
     return solution;

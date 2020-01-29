@@ -20,9 +20,7 @@ class Solution {
   int pathLength = 0;
   int runningCost = 0;
  public:
-  Solution<T>() {
-
-  }
+  Solution<T>() = default;
   /**
    * Handles creating the solution string we'll send to our client.
    */
@@ -35,6 +33,9 @@ class Solution {
       // Calls direction to append the direction we move in.
       Direction(prev->at(0),node->getState()->at(0),prev->at(1),node->getState()->at(1),node,solPath);
     }
+    /* Remove unneeded ", " from the string for visual's sake */
+    solPath.pop_back();
+    solPath.pop_back();
     return solPath;
   }
   void addNode(State<T>* node) {

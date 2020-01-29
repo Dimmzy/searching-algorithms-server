@@ -2,6 +2,7 @@
 #define STATE_H_
 
 #include <string>
+#include <limits>
 
 /**
  * The State Object is a specific state in a Searchable object that we use to
@@ -12,10 +13,10 @@ class State {
  private:
   T *state; // The state itself
   std::string state_name; // The name of the current state in a string type
-  double fScore; // the F score is the score function used to define the cost of the node in the A* algorithm
-  double cost; // the cost to cross this state
+  double fScore{}; // the F score is the score function used to define the cost of the node in the A* algorithm
+  double cost{}; // the cost to cross this state
   State<T> *cameFrom; // the state we came from to this state
-  double costFromInitial; //cost to reach this state from the initial state
+  double costFromInitial{}; //cost to reach this state from the initial state
 
  public:
   State<T>(T *state, double cost) {
@@ -23,7 +24,7 @@ class State {
     this->state_name = "(" + std::to_string(state->at(0)) + "," + std::to_string(state->at(1)) + ")";
     this->cost = cost;
     this->cameFrom = nullptr;
-    this->costFromInitial = 99999; // TODO: Change to "infinity"
+    this->costFromInitial = std::numeric_limits<double>::infinity();
   }
 
   /*
