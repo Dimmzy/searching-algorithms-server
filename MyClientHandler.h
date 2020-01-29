@@ -23,6 +23,7 @@ class MyClientHandler : public ClientHandler{
   void handleClient(int input_stream, int output_stream) override;
  private:
   static void rmLinebreak(std::string& str);
+  FileCacheManager* cacheManager{};
 };
 
 #endif //FLIGHTSIMULATORPART2__MYCLIENTHANDLER_H_

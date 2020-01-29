@@ -14,10 +14,9 @@ class FileCacheManager : public CacheManager {
  private:
   std::map<std::string, std::string> solutionCache; // Key: Problem , Value: Filename (relative path)
  public:
-  FileCacheManager(std::string solverName);
   bool findSolution(std::string problem) override;
   std::string getSolution(std::string problem) override;
-  void saveSolution(std::string problem, std::string solution, std::string fileName) override;
+  void saveSolution(std::string problem, std::string solution) override;
 };
 
 #endif //SEARCHING_ALGORITHMS_SERVER__FILECACHEMANAGER_H_

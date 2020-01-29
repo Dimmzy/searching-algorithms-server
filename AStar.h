@@ -82,9 +82,6 @@ class AStar : public Searcher<S> {
   int manhattanDistance(State<S> *current, State<S> *goal) {
     return abs(current->getX() - goal->getX()) + abs(current->getY() - goal->getY());
   }
-  std::string getName() override {
-    return "AStar";
-  }
 };
 
 #endif //FLIGHTSIMULATORPART2__ASTAR_H_

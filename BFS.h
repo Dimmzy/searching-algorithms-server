@@ -55,16 +55,6 @@ class BFS : public Searcher<S> {
       }
     }
   }
-  /**
-   * @return Returns the counter of the number of nodes we've traversed when solving.
-   */
-  int getNumOfNodes() {
-    return this->numOfNodes;
-  }
-
-  std::string getName() override {
-    return "BFS";
-  }
 };
 
 #endif //FLIGHTSIMULATORPART2__BFS_H_

@@ -13,7 +13,6 @@
 template <typename S>
 class Searcher {
  public:
-  virtual std::string getName() = 0;
   virtual Solution<S>* search(Searchable<S>* searchableItem) = 0;
 };
 

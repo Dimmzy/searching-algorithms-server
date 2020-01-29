@@ -3,6 +3,7 @@
 #include "Matrix.h"
 #include "ObjectAdapter.h"
 #include "AStar.h"
+#include <functional>
 
 /* Maximal amount of information we're ready to receive */
 #define BUFFER_SIZE 1024
@@ -66,19 +67,26 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     rmLinebreak(input);
   }
   close(input_stream);
-  auto* init = new State<std::vector<int>>(&start,inputMatrix[start.at(0)][start.at(1)]);
-  auto* goal = new State<std::vector<int>>(&end,inputMatrix[end.at(0)][end.at(1)]);
-  auto* matrix = new Matrix(columns, init, goal);
-  /* Inserts the states into our matrix */
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < columns; j++) {
-      std::vector<int> cell{i,j};
-      matrix->addCell(new State<std::vector<int>>(&cell,inputMatrix[i][j]));
+  std::size_t problemName = std::hash<std::string>{}(stringToHash);
+  char* solution;
+  if (this->cacheManager->findSolution(std::to_string(problemName))) {
+    solution = &(this->cacheManager->getSolution(std::to_string(problemName)))[0];
+  } else {
+    auto *init = new State<std::vector<int>>(&start, inputMatrix[start.at(0)][start.at(1)]);
+    auto *goal = new State<std::vector<int>>(&end, inputMatrix[end.at(0)][end.at(1)]);
+    auto *matrix = new Matrix(columns, init, goal);
+    /* Inserts the states into our matrix */
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < columns; j++) {
+        std::vector<int> cell{i, j};
+        matrix->addCell(new State<std::vector<int>>(&cell, inputMatrix[i][j]));
+      }
     }
+    /* Creates our Object Adapter that'll handle solving the problem using the A Star path finding algorithm */
+    auto objectAdapter = new ObjectAdapter<std::vector<int>>(new AStar<std::vector<int>>());
+    solution = &objectAdapter->solve(matrix)[0]; // Converts our str answer to a char array
+    this->cacheManager->saveSolution(problemName,solution);
   }
-  /* Creates our Object Adapter that'll handle solving the problem using the A Star path finding algorithm */
-  auto objectAdapter = new ObjectAdapter<std::vector<int>>(new AStar<std::vector<int>>());
-  char* solution = &objectAdapter->solve(matrix)[0]; // Converts our str answer to a char array
   write(output_stream,solution,BUFFER_SIZE); // Sends the solution back to the client
 
 }

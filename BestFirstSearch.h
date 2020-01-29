@@ -107,10 +107,6 @@ class BestFirstSearch : public Searcher<T> {
         }
       }
     }
-  }
-  virtual std::string getName() {
-    return "BestFirstSearch";
-  }
 };
 
 #endif //BESTFIRSTSEARCH_H_
