@@ -24,7 +24,13 @@ It's safe to say A* seems like the best choice, but we've tested each algorithm 
 
 ## Usage
 
-*<USAGE_GOES_HERE>*
+Compile with
+
+> g++ -std=c++14 *.cpp -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -o a.out -pthread
+
+You can then connect to the server (port 6500 by default) or specify a port as an argument.
+
+Send the matrix you want to use A* on, and after several calculations you'll receive the A* path as output from the server.
 
 ## Contributors
 [Dima](https://github.com/Dimmzy)   
