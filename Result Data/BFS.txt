@@ -1,0 +1,51 @@
+client 1 connected to server
+client 2 connected to server
+client 3 connected to server
+client 4 connected to server
+client 5 connected to server
+client 6 connected to server
+client 7 connected to server
+client 8 connected to server
+client 9 connected to server
+client 10 connected to server
+
+client 1 sent to server
+client 1 received:
+Down (15), Down (17), Down (22), Down (26), Down (30), Down (40), Down (55), Right (65), Right (85), Right (100), Right (100), Right (102), Right (122), Right (125), Down (132), Right (151), Right (166), Down (171)
+
+client 2 sent to server
+client 2 received:
+Down (32), Down (44), Down (57), Down (60), Down (80), Down (90), Down (92), Down (107), Down (120), Down (126), Down (132), Right (135), Down (154), Down (156), Down (161), Right (169), Right (183), Right (199), Right (206), Right (215), Right (221), Right (240), Right (252), Right (257), Right (271), Right (277), Right (295), Right (302)
+
+client 3 sent to server
+client 3 received:
+Down (23), Down (31), Down (35), Down (38), Down (39), Down (58), Down (63), Down (67), Down (77), Down (88), Down (103), Down (121), Down (141), Down (154), Down (165), Down (183), Down (184), Down (197), Down (209), Right (219), Right (238), Right (256), Right (276), Right (282), Right (294), Right (299), Right (305), Right (305), Right (318), Right (338), Right (339), Right (343), Right (358), Right (363), Right (366), Right (367), Right (382), Right (397)
+
+client 4 sent to server
+client 4 received:
+Down (20), Down (25), Down (31), Down (35), Down (45), Down (55), Down (69), Down (74), Down (85), Down (97), Down (99), Down (117), Down (133), Down (148), Down (155), Down (173), Down (174), Down (184), Down (200), Right (220), Down (234), Down (239), Down (242), Down (259), Right (263), Right (277), Right (294), Down (312), Right (330), Right (339), Right (358), Right (372), Right (387), Right (398), Right (402), Right (412), Right (427), Right (439), Right (442), Right (444), Right (463), Right (482), Right (502), Right (507), Right (524), Right (529), Right (537), Right (540)
+
+client 5 sent to server
+client 5 received:
+Down (14), Down (19), Down (31), Down (49), Down (52), Down (63), Down (71), Down (73), Right (73), Down (86), Down (88), Down (93), Down (110), Down (115), Down (115), Down (120), Down (127), Down (147), Down (158), Down (173), Down (188), Down (204), Down (219), Down (229), Down (236), Down (236), Down (238), Right (253), Right (272), Right (273), Right (279), Right (293), Right (295), Right (313), Right (332), Right (335), Right (346), Right (364), Right (377), Down (393), Right (397), Right (402), Down (419), Right (433), Right (451), Right (453), Right (456), Right (465), Right (465), Right (468), Right (481), Right (498), Right (516), Right (518), Right (538), Right (550), Right (551), Down (558)
+
+client 6 sent to server
+client 6 received:
+Down (8), Down (14), Down (27), Down (30), Down (35), Down (43), Down (59), Down (66), Down (72), Down (80), Down (86), Down (90), Down (100), Down (106), Down (123), Down (123), Down (123), Down (131), Down (145), Down (158), Down (172), Down (186), Down (203), Down (216), Down (222), Down (232), Right (246), Down (253), Down (258), Down (269), Down (289), Down (308), Down (324), Down (332), Right (340), Right (347), Right (348), Right (361), Right (369), Right (387), Right (391), Down (401), Right (421), Right (435), Right (444), Right (456), Right (458), Right (473), Right (483), Right (486), Right (490), Right (499), Right (508), Right (514), Right (521), Right (534), Right (537), Right (557), Right (569), Right (570), Right (583), Right (599), Right (615), Right (629), Right (633), Right (637), Right (641), Right (652)
+
+client 7 sent to server
+client 7 received:
+Down (11), Right (29), Down (42), Down (47), Down (51), Down (53), Down (69), Down (78), Down (82), Down (89), Down (96), Down (110), Down (113), Down (114), Down (127), Down (144), Down (145), Down (146), Down (163), Right (164), Down (181), Down (195), Down (203), Down (204), Down (222), Down (230), Down (232), Down (241), Down (260), Down (278), Down (280), Down (283), Down (285), Down (305), Down (308), Down (322), Down (327), Right (334), Right (337), Right (352), Right (358), Right (369), Right (378), Down (381), Right (399), Down (411), Right (424), Right (434), Right (453), Right (463), Right (481), Right (493), Right (508), Right (526), Right (545), Down (556), Right (575), Right (582), Right (597), Down (613), Right (617), Right (622), Right (624), Right (625), Right (642), Right (642), Right (650), Right (660), Right (666), Right (672), Right (680), Right (687), Right (701), Right (713), Right (721), Right (740), Right (757), Right (757)
+
+client 8 sent to server
+client 8 received:
+Down (33), Down (51), Down (70), Down (81), Down (89), Down (100), Down (107), Down (109), Down (114), Down (115), Down (115), Down (126), Down (132), Down (152), Down (162), Down (173), Down (192), Right (206), Down (220), Down (228), Right (235), Down (243), Right (257), Down (262), Down (271), Down (282), Down (292), Down (310), Down (326), Down (341), Down (349), Down (354), Down (362), Down (378), Down (392), Down (411), Down (429), Down (434), Down (449), Down (449), Down (455), Down (455), Down (470), Right (478), Right (485), Right (486), Right (505), Right (510), Right (517), Right (534), Right (550), Right (565), Right (584), Right (594), Right (597), Right (616), Right (630), Right (645), Right (646), Down (662), Right (678), Right (682), Right (699), Right (702), Right (704), Down (711), Down (714), Right (726), Right (736), Right (738), Right (754), Right (760), Right (778), Right (780), Right (791), Down (811), Right (817), Right (823), Right (828), Right (842), Right (852), Right (855), Right (868), Right (875), Right (875), Right (888), Right (898), Right (898)
+
+client 9 sent to server
+client 9 received:
+Down (10), Down (26), Down (39), Down (52), Down (62), Down (68), Down (79), Down (80), Down (80), Right (90), Down (109), Down (114), Down (130), Down (145), Down (162), Down (181), Down (196), Down (212), Down (227), Down (236), Down (247), Down (262), Down (269), Down (288), Down (290), Down (292), Down (301), Down (312), Down (328), Down (335), Down (348), Down (363), Down (375), Down (377), Right (389), Down (396), Down (409), Down (426), Down (437), Down (456), Down (466), Down (482), Down (484), Right (488), Down (493), Down (501), Down (505), Down (513), Right (515), Right (517), Down (522), Right (534), Right (534), Down (534), Right (538), Right (549), Right (556), Right (575), Right (582), Right (598), Right (601), Right (615), Right (631), Right (638), Right (657), Right (677), Right (692), Right (705), Right (718), Right (726), Right (731), Right (732), Right (736), Right (754), Right (771), Right (785), Right (803), Right (807), Right (816), Right (827), Right (832), Right (850), Right (863), Right (880), Right (886), Right (892), Right (898), Right (898), Right (912), Right (914), Right (930), Right (947), Right (964), Right (976)
+
+client 10 sent to server
+client 10 received:
+Down (16), Right (33), Down (44), Down (62), Down (65), Down (70), Down (84), Down (90), Down (103), Down (122), Down (142), Down (149), Down (153), Right (162), Down (164), Down (167), Down (170), Down (172), Down (177), Down (186), Down (202), Down (210), Down (228), Down (228), Down (241), Down (254), Down (271), Down (291), Down (295), Down (304), Down (319), Down (323), Down (327), Down (341), Down (345), Down (354), Down (367), Down (387), Down (394), Down (411), Down (421), Down (428), Down (436), Down (450), Down (454), Down (460), Down (464), Down (481), Right (487), Right (505), Right (513), Right (517), Right (527), Right (540), Down (545), Right (564), Right (576), Right (585), Down (600), Right (607), Right (618), Right (630), Right (637), Right (657), Right (662), Right (672), Right (676), Right (695), Right (710), Right (727), Right (737), Right (752), Right (772), Right (791), Right (791), Right (796), Right (812), Right (821), Right (840), Right (847), Right (854), Right (863), Right (872), Right (877), Right (889), Right (889), Right (901), Right (902), Right (903), Down (922), Right (922), Right (928), Right (938), Right (945), Right (958), Right (964), Right (976), Right (979)
+
