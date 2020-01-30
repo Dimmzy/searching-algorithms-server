@@ -1,4 +1,5 @@
 # Searching Algorithms Server
+Github Link: https://github.com/Dimmzy/searching-algorithms-server
 The Searching Algorithms Server program provides a framework to handle communications between a client and a server.
 The main focus of the program is to allow the client to send a structured "problem" and the server to process it and pass a solution.
 
@@ -46,7 +47,7 @@ The matrix template you send to the server is:
 
 > end
 
-The cell locations should denote the cost for the specific cell. *cost of -1 is blocked cell*.
+The cell locations should denote the cost for the specific cell.  *cost of -1 is blocked cell*.
 
 For example:
 
