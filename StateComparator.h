@@ -1,9 +1,6 @@
-//
-// Created by haim on 27/01/2020.
-//
-
 #ifndef FLIGHTSIMULATORPART2__STATECOMPARATOR_H_
 #define FLIGHTSIMULATORPART2__STATECOMPARATOR_H_
+
 #include <vector>
 #include "State.h"
 template <typename T>

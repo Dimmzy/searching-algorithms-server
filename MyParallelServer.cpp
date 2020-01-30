@@ -53,7 +53,6 @@ void MyParallelServer::start(int socketfd, sockaddr_in address, ClientHandler *c
 }
 
 void MyParallelServer::handleClientFromServer(ClientHandler *client_handler, int sockfd) {
-
   client_handler->handleClient(sockfd, sockfd);
 }
 

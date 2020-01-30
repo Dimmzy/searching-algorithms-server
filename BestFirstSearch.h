@@ -1,5 +1,6 @@
 #ifndef BESTFIRSTSEARCH_H_
 #define BESTFIRSTSEARCH_H_
+
 #include "Solution.h"
 #include "Searchable.h"
 #include "Searcher.h"
@@ -8,6 +9,7 @@
 #include "MyPriorityQueue.h"
 #include <string>
 #include "StateComparator.h"
+
 template<typename T>
 class BestFirstSearch : public Searcher<T> {
  private:

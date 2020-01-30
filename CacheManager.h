@@ -12,6 +12,7 @@
  */
 class CacheManager {
  public:
+  virtual void loadToCache() = 0;
   virtual bool findSolution(std::string problem) = 0;
   virtual std::string getSolution(std::string fileName) = 0;
   virtual void saveSolution(std::string problem, std::string solution) = 0;

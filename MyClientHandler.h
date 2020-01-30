@@ -20,7 +20,7 @@
  */
 class MyClientHandler : public ClientHandler{
  public:
-  MyClientHandler(CacheManager* file_cache_manager) {
+  explicit MyClientHandler(CacheManager *file_cache_manager) {
     this->cacheManager = file_cache_manager;
   }
   void handleClient(int input_stream, int output_stream) override;

@@ -15,6 +15,7 @@
  * @param output_stream the output stream we'll send our problem to
  */
 void MyClientHandler::handleClient(int input_stream, int output_stream) {
+  this->cacheManager->loadToCache(); // Loads existing solutions from Solutions/ directory into our cache
   char buffer[BUFFER_SIZE] = {0};
   int columns = 0;
   bool columnSet = false;
@@ -23,7 +24,7 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   std::string stringToHash;
   std::vector<int> start;
   std::vector<int> end;
-  read(input_stream, buffer,BUFFER_SIZE);
+  read(input_stream, buffer, BUFFER_SIZE);
   std::string line, input(buffer);
   std::vector<std::vector<double>> inputMatrix;
   rmLinebreak(input);
@@ -68,7 +69,8 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   std::size_t problemName = std::hash<std::string>{}(stringToHash);
   std::string solution;
   if (this->cacheManager->findSolution(std::to_string(problemName))) {
-    solution = &(this->cacheManager->getSolution(std::to_string(problemName)))[0];
+    std::cout << "Found Solution Locally" << std::endl;
+    solution = this->cacheManager->getSolution(std::to_string(problemName));
   } else {
     auto *init = new State<std::vector<int>>(&start, inputMatrix[start.at(0)][start.at(1)]);
     auto *goal = new State<std::vector<int>>(&end, inputMatrix[end.at(0)][end.at(1)]);
