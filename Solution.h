@@ -31,7 +31,7 @@ class Solution {
       runningCost += node->getCost();
       T* prev = node->getPreviousNode()->getState();
       // Calls direction to append the direction we move in.
-      Direction(prev->at(0),node->getState()->at(0),prev->at(1),node->getState()->at(1),node,solPath);
+      Direction(prev->at(0), node->getState()->at(0), prev->at(1), node->getState()->at(1), solPath);
     }
     /* Remove unneeded ", " from the string for visual's sake */
     solPath.pop_back();
@@ -60,7 +60,7 @@ class Solution {
     this->runningCost = cost;
   }
 
-  void Direction(int y1, int y2, int x1, int x2,  State<T>* state, std::string& solPath) {
+  void Direction(int y1, int y2, int x1, int x2, std::string &solPath) {
     if (x2 > x1)
       solPath.append("Right (" + std::to_string(this->runningCost) + "), ");
     if (y2 > y1)

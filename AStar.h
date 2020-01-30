@@ -30,7 +30,6 @@ class AStar : public Searcher<S> {
       if (searchableItem->isGoalState(minNode)) {
         /* Backtrace and report to Solution Class */
         auto* solution = new Solution<S>();
-        double sum = 0;
         while(minNode != initial) {
           solution->addNode(minNode);
           minNode = minNode->getPreviousNode();

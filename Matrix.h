@@ -11,7 +11,7 @@
  */
 class Matrix : public Searchable<std::vector<int>> {
  public:
-  Matrix(int size, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state);
+  Matrix(int matrixSize, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state);
   void addCell(State<std::vector<int>> *state);
   State<std::vector<int>> *getInitialState() override;
   State<std::vector<int>> *getGoalState() override;

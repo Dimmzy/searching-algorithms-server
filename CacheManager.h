@@ -16,6 +16,6 @@ class CacheManager {
   virtual bool findSolution(std::string problem) = 0;
   virtual std::string getSolution(std::string fileName) = 0;
   virtual void saveSolution(std::string problem, std::string solution) = 0;
-
+  virtual ~CacheManager() = default;
 };
 #endif //CACHEMANAGER_H_

@@ -13,7 +13,8 @@
 template <typename S>
 class Searcher {
  public:
-  virtual Solution<S>* search(Searchable<S>* searchableItem) = 0;
+  virtual Solution<S> *search(Searchable<S> *searchableItem) = 0;
+  virtual ~Searcher() = default;
 };
 
 #endif //SEARCHER_H_

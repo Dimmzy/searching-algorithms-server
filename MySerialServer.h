@@ -22,26 +22,5 @@ class MySerialServer : public Server {
   void stop(int sockfd) override;
 };
 
-namespace boot {
-class Main {
- public:
-  static int main(int size, char *args[]) {
-    /*
-    Solver<std::string,std::string>* string_reverser = new StringReverser();
-    CacheManager *file_cache_manager = new FileCacheManager("StringReverser");
-    ClientHandler* my_test_client_handler = new MyTestClientHandler(string_reverser, file_cache_manager);
-    Server* my_serial_server = new MySerialServer();
-    my_serial_server->open(std::stoi(args[1]), my_test_client_handler);
-    return 0;
-     */
-    /*
-    ClientHandler* ch = new MyClientHandler();
-    Server* my_serial_server = new MySerialServer();
-    my_serial_server->open(std::stoi(args[1]), ch);
-     */
-    return 0;
-  }
-};
-}
 
 #endif //FLIGHTSIMULATORPART2__MYSERIALSERVER_H_

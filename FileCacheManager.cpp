@@ -46,8 +46,10 @@ std::string FileCacheManager::getSolution(std::string problem) {
     getline(solFile, solution);
     solFile.close();
     return solution;
-  } else
-    std::cout << "Couldn't open file" << std::endl;
+  } else {
+    return "Couldn't open file";
+  }
+
 }
 
 /**

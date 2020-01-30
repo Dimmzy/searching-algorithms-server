@@ -21,12 +21,12 @@ void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
   {
     fileName = problem + '.' + "StringReverser";
     //first check if we have already solved this problem before
-    if(this->cache_manager->findSolution(problem)) {
+    if (this->cManager->findSolution(problem)) {
       std::cout << "Found Solution for " + fileName << std::endl;
-      solution = this->cache_manager->getSolution(problem) + '\n';
+      solution = this->cManager->getSolution(problem) + '\n';
     } else { //it is a brand new problem
       solution = this->solver->solve(problem) + '\n';
-      this->cache_manager->saveSolution(problem, solution);
+      this->cManager->saveSolution(problem, solution);
     }
     //clean the buffer of the solution
     bzero(bufferSolution, BUFFERSIZE);
@@ -48,10 +48,10 @@ void MyTestClientHandler::handleClient(int input_stream, int output_stream) {
 /**
  * Constructor
  * @param string_reverser The responsible object for solving the recieved problems from the client
- * @param cache_manager The database in which we keep all the problems we have already solved
+ * @param cacheManager The database in which we keep all the problems we have already solved
  */
-MyTestClientHandler::MyTestClientHandler(Solver<std::string , std::string>* string_reverser, CacheManager*
-cache_manager) {
+MyTestClientHandler::MyTestClientHandler(Solver<std::string, std::string> *string_reverser, CacheManager *
+cacheManager) {
   this->solver = string_reverser;
-  this->cache_manager = cache_manager;
+  this->cManager = cacheManager;
 }

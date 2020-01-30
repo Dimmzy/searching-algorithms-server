@@ -9,6 +9,7 @@
 class ClientHandler {
  public:
   virtual void handleClient(int input_stream, int output_stream) = 0;
+  virtual ~ClientHandler() = default;
 };
 
 #endif //CLIENTHANDLER_H_

@@ -16,10 +16,10 @@
  * @tparam S The State object template type.
  */
 template <typename T>
-class ObjectAdapter : public Solver<Matrix*, std::string> {
+class ObjectAdapter : public Solver<Matrix *, std::string> {
  public:
-  explicit ObjectAdapter<T>(Searcher<T>* searcher) {
-    this->searcher = searcher;
+  explicit ObjectAdapter<T>(Searcher<T> *searcherObject) {
+    this->searcher = searcherObject;
   }
 
   /**

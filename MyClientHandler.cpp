@@ -3,7 +3,6 @@
 #include "Matrix.h"
 #include "ObjectAdapter.h"
 #include "AStar.h"
-#include <functional>
 
 /* Maximal amount of information we're ready to receive */
 #define BUFFER_SIZE 1024
@@ -71,6 +70,10 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
   if (this->cacheManager->findSolution(std::to_string(problemName))) {
     std::cout << "Found Solution Locally" << std::endl;
     solution = this->cacheManager->getSolution(std::to_string(problemName));
+    if (solution == "Couldn't open file") {
+      std::cout << "Can't access local files, exiting..." << std::endl;
+      return;
+    }
   } else {
     auto *init = new State<std::vector<int>>(&start, inputMatrix[start.at(0)][start.at(1)]);
     auto *goal = new State<std::vector<int>>(&end, inputMatrix[end.at(0)][end.at(1)]);

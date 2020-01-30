@@ -19,10 +19,10 @@ class State {
   double costFromInitial{}; //cost to reach this state from the initial state
 
  public:
-  State<T>(T *state, double cost) {
-    this->state = state;
-    this->state_name = "(" + std::to_string(state->at(0)) + "," + std::to_string(state->at(1)) + ")";
-    this->cost = cost;
+  State<T>(T *nodeState, double nodeCost) {
+    this->state = nodeState;
+    this->state_name = "(" + std::to_string(nodeState->at(0)) + "," + std::to_string(nodeState->at(1)) + ")";
+    this->cost = nodeCost;
     this->cameFrom = nullptr;
     this->costFromInitial = std::numeric_limits<double>::infinity();
   }
@@ -69,8 +69,8 @@ class State {
    * Sets the cost of traversing from the initial node to this one
    * @param cost the cost we set to.
    */
-  void setCostFromInitial(const double cost) {
-    this->costFromInitial = cost;
+  void setCostFromInitial(const double nodeCost) {
+    this->costFromInitial = nodeCost;
   }
 
   /**
@@ -104,8 +104,8 @@ class State {
   /**
    * @param cost sets the cost of the current state
    */
-  void setCost(double cost) {
-    this->cost = cost;
+  void setCost(double nodeCost) {
+    this->cost = nodeCost;
   }
 
   /**

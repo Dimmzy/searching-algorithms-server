@@ -13,11 +13,11 @@
 
 class MyTestClientHandler : public ClientHandler {
  private:
-  Solver<std::string , std::string>* solver; //The responsible class for solving the problems of the client
-  CacheManager* cache_manager; //The database that keeps the solution for problems we have seen before
+  Solver<std::string, std::string> *solver; //The responsible class for solving the problems of the client
+  CacheManager *cManager; //The database that keeps the solution for problems we have seen before
  public:
   void handleClient(int input_stream, int output_stream) override;
-  MyTestClientHandler(Solver<std::string , std::string>* string_reverser, CacheManager* cache_manager);
+  MyTestClientHandler(Solver<std::string, std::string> *string_reverser, CacheManager *cacheManager);
 };
 
 #endif //MYTESTCLIENTHANDLER_H_

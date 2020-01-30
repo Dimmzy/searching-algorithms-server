@@ -67,14 +67,15 @@ void Matrix::addCell(State<std::vector<int>> *state) {
 
 /**
  * Matrix Object constructor.
- * @param size Size of the matrix
+ * @param matrixSize Size of the matrix
  * @param initial_state The starting cell
  * @param goal_state The last cell
  */
-Matrix::Matrix(int size, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state)
-    : size(size), initialState(initial_state), goalState(goal_state) {
+Matrix::Matrix(int matrixSize, State<std::vector<int>> *initial_state, State<std::vector<int>> *goal_state)
+    : size(matrixSize), initialState(initial_state), goalState(goal_state) {
   this->matrix =
-      std::vector<std::vector<State<std::vector<int>> *>>(size, std::vector<State<std::vector<int>> *>(size, nullptr));
+      std::vector<std::vector<State<std::vector<int>> *>>(matrixSize,
+                                                          std::vector<State<std::vector<int>> *>(matrixSize, nullptr));
 }
 
 void Matrix::printMatrix() {

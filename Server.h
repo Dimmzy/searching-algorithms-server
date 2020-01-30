@@ -11,6 +11,7 @@ class Server {
  public:
   virtual void open(int port, ClientHandler* client_handler) = 0;
   virtual void stop(int sockfd) = 0;
+  virtual ~Server() = default;
 };
 
 #endif //SERVER_H_
