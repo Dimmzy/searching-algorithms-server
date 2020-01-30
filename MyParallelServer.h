@@ -30,7 +30,7 @@ class Main {
     ClientHandler *clientHandler = new MyClientHandler(cacheManager);
     Server *parallelServer = new MyParallelServer();
     if (size == 2) { // Opens the server that will listen on the port that was passed as argument
-      parallelServer->open(std::stoi(args[1]), clientHandler);
+    parallelServer->open(std::stoi(args[1]), clientHandler);
     } else if (size == 1) { // Opens the server that will listen on the default port specified
       parallelServer->open(DEFAULT_PORT, clientHandler);
     } else {

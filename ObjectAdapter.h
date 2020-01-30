@@ -33,7 +33,7 @@ class ObjectAdapter : public Solver<Matrix *, std::string> {
       return "Something went wrong!";
     }
     /* Printing pathing information for the graph */
-    // std::cout << "Num of nodes is " + std::to_string(sol->getNumofNodes()) << std::endl;
+    // std::cout << "Num of nodes processed is " + std::to_string(sol->getNumofNodes()) << std::endl;
     // std::cout << "Path length is " + std::to_string(sol->getPathLength()) << std::endl;
     sol->reversePath();
     std::string solution = sol->printSolution();
