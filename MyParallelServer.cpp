@@ -1,11 +1,11 @@
-#include "MyParallerServer.h"
+#include "MyParallelServer.h"
 
 /**
  * A function that open the socket with the server
  * @param port The port
  * @param client_handler The client which his problems we need to solve
  */
-void MyParallerServer::open(int port, ClientHandler *client_handler) {
+void MyParallelServer::open(int port, ClientHandler *client_handler) {
   int socketfd = socket(AF_INET, SOCK_STREAM, 0);
   if (socketfd == -1)
     std::cerr << "Couldn't create socket" << std::endl;
@@ -28,16 +28,15 @@ void MyParallerServer::open(int port, ClientHandler *client_handler) {
   this->start(socketfd, address, client_handler);
 }
 
-void MyParallerServer::start(int socketfd, sockaddr_in address, ClientHandler *client_handler) {
+void MyParallelServer::start(int socketfd, sockaddr_in address, ClientHandler *client_handler) {
   int client_socket;
-  while(true) {
+  while (true) {
     client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
     if (client_socket < 0) {
       if (errno == EWOULDBLOCK) {
         std::cout << "timeout!" << std::endl;
         break;
-      }
-      else {
+      } else {
         std::cerr << "Error accepting connection" << std::endl;
         std::cout << strerror(errno);
         break;
@@ -45,24 +44,24 @@ void MyParallerServer::start(int socketfd, sockaddr_in address, ClientHandler *c
     }
     else {
       std::cout << "Connected" << std::endl;
-      this->threadVector.emplace_back(std::thread(&MyParallerServer::handleClientFromServer, this, client_handler,
-          client_socket));
+      this->threadVector.emplace_back(std::thread(&MyParallelServer::handleClientFromServer, this, client_handler,
+                                                  client_socket));
       //client_handler->handleClient(client_socket, client_socket);
     }
   }
   this->stop(socketfd);
 }
 
-void MyParallerServer::handleClientFromServer(ClientHandler* client_handler, int sockfd) {
+void MyParallelServer::handleClientFromServer(ClientHandler *client_handler, int sockfd) {
 
   client_handler->handleClient(sockfd, sockfd);
 }
 
-void MyParallerServer::stop(int sockfd)  {
+void MyParallelServer::stop(int sockfd) {
   close(sockfd);
 }
-MyParallerServer::~MyParallerServer() {
-  for (auto & i : this->threadVector) {
+MyParallelServer::~MyParallelServer() {
+  for (auto &i : this->threadVector) {
     i.join();
   }
 }

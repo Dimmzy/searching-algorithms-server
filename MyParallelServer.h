@@ -6,13 +6,13 @@
 #include <vector>
 #include "MyClientHandler.h"
 #define MAX_CONNECTIONS 10
-class MyParallerServer :public Server{
+class MyParallelServer : public Server {
  public:
-  void open(int port, ClientHandler* client_handler) override;
-  void start(int socketfd, sockaddr_in address, ClientHandler* client_handler);
+  void open(int port, ClientHandler *client_handler) override;
+  void start(int socketfd, sockaddr_in address, ClientHandler *client_handler);
   void stop(int sockfd) override;
-  void handleClientFromServer(ClientHandler* client_handler, int sockfd);
-  ~MyParallerServer();
+  void handleClientFromServer(ClientHandler *client_handler, int sockfd);
+  ~MyParallelServer();
 
  private:
   std::vector<std::thread> threadVector;
@@ -24,8 +24,8 @@ class Main {
   static int main(int size, char *args[]) {
     auto* solutionCache = new std::map<std::string, std::string>();
     CacheManager *file_cache_manager = new FileCacheManager(solutionCache);
-    ClientHandler* ch = new MyClientHandler(file_cache_manager);
-    Server* my_paraller_server = new MyParallerServer();
+    ClientHandler *ch = new MyClientHandler(file_cache_manager);
+    Server *my_paraller_server = new MyParallelServer();
     my_paraller_server->open(std::stoi(args[1]), ch);
     delete solutionCache;
     delete file_cache_manager;

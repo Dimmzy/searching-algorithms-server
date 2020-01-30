@@ -1,4 +1,4 @@
-#include "MyParallerServer.h"
+#include "MyParallelServer.h"
 #include "Matrix.h"
 #include "State.h"
 #include "ObjectAdapter.h"
