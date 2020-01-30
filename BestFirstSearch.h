@@ -76,20 +76,17 @@ class BestFirstSearch : public Searcher<T> {
         solution->setNumOfNodes(nodesTraversed);
         /* Backtrace and report to Solution Class */
         while (!n->equals(initialState)) {
-          //std::cout << n->getState_Name() << std::endl;
           solution->addNode(n);
           n = n->getPreviousNode();
         }
         solution->setStartingRunningCost(initialState->getCost());
-        //solution->printNodes();
-        //solution->reversePath();
+        delete closed;
         return solution;
       }
       // calling the delegated method, returns a vector of states with n as a parent
       succerssors = searchableItem->getAllPossibleStates(n);
 
       for (State<T> *state : *succerssors) {
-        //std::cout << state->getState_Name() << std::endl;
         if (closed->find(state) == closed->end() && this->my_priority_queue->find(state) ==
             this->my_priority_queue->end()) {
           state->setPreviousNode(n);
@@ -106,6 +103,7 @@ class BestFirstSearch : public Searcher<T> {
         }
       }
     }
+    delete closed;
     return nullptr;
   }
 };

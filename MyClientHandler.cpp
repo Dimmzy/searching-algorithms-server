@@ -65,7 +65,6 @@ void MyClientHandler::handleClient(int input_stream, int output_stream) {
     input = buffer;
     rmLinebreak(input);
   }
-  //close(input_stream);
   std::size_t problemName = std::hash<std::string>{}(stringToHash);
   std::string solution;
   if (this->cacheManager->findSolution(std::to_string(problemName))) {

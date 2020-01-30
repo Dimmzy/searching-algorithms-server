@@ -22,19 +22,14 @@ namespace boot {
 class Main {
  public:
   static int main(int size, char *args[]) {
-    /*
-    Solver<std::string,std::string>* string_reverser = new StringReverser();
-    CacheManager *file_cache_manager = new FileCacheManager("StringReverser");
-    ClientHandler* my_test_client_handler = new MyTestClientHandler(string_reverser, file_cache_manager);
-    Server* my_serial_server = new MySerialServer();
-    my_serial_server->open(std::stoi(args[1]), my_test_client_handler);
-    return 0;
-     */
     auto* solutionCache = new std::map<std::string, std::string>();
     CacheManager *file_cache_manager = new FileCacheManager(solutionCache);
     ClientHandler* ch = new MyClientHandler(file_cache_manager);
     Server* my_paraller_server = new MyParallerServer();
     my_paraller_server->open(std::stoi(args[1]), ch);
+    delete solutionCache;
+    delete file_cache_manager;
+    delete my_paraller_server;
     return 0;
   }
 };
