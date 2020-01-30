@@ -46,7 +46,7 @@ The matrix template you send to the server is:
 
 > end
 
-The cell locations should denote the cost for the specific cell. *cost of -1 is blocked cell.
+The cell locations should denote the cost for the specific cell. *cost of -1 is blocked cell*.
 
 For example:
 
